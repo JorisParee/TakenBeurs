@@ -1,51 +1,48 @@
 class task {
+
+    /**
+     * initializes the task and checks if correct id;
+     * @param {id} task 
+     */
     constructor(task) {
-        this.initialize(task);
+        //check if task is in database
     }
 
     /**
-     * initialize the task with all values from the database
-     * 
-     * @param task 
+     * sets all values that are needed to set.
      */
-    initialize(task) {
-        //acces data from the database
-        this.pricehistory = [];
-        this.disabled = false;
-        this.name = "name";
+    initialize() {
 
     }
 
     /**
-     * returns if tast is disabled
-     */
-    getDisabled() {
-        return this.disabled;
-    }
-
-    /**
-     * set the disabled boolean
-     * @param {boolean} disabled_bool 
-     * 
-     * @modifies the disabled property and also changes it in the database
-     */
-    setDisabled(disabled_bool) {
-        this.disabled = disabled_bool;
-        return this.disabled;
-        //update in database;
-    }
-
-    /**
-     * returns the current price of this procuct
-     * @return number being the last availible price;
+     * return the current price of this task
+     * @return number being the last price;
      */
     getCurrentPrice() {
-        return this.pricehistory[this.pricehistory.length];
+
     }
 
-    getPriceHistory() {
-        return this.pricehistory;
+    /**
+     * returns the name of this task
+     */
+    getName() {
+
     }
 
+    /**
+     * when the task is done call this
+     * will update the task state also in database.
+     */
+    setTaskDone() {
+
+    }
+
+    /**
+     * gets the id of this task as it is in the database.
+     */
+    getId() {
+
+    }
 
 }
