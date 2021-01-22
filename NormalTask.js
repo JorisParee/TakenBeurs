@@ -1,5 +1,14 @@
-class task {
+class task extends Task {
+
+    /**
+     * initialies the task with its values
+     * 
+     * @param {id} task needs to refer to normal task in database;
+     * 
+     * @override
+     */
     constructor(task) {
+        super();
         this.initialize(task);
     }
 
@@ -7,7 +16,7 @@ class task {
      * initialize the task with all values from the database
      * pricehistory and donehistory may not be empty;
      * 
-     * @param task 
+     * @param task needs to refer to task in database;
      */
     initialize(task) {
         //acces data from the database
@@ -42,6 +51,8 @@ class task {
      * returns the current price of this procuct
      * 
      * @return number being the last availible price;
+     * 
+     * @override
      */
     getCurrentPrice() {
         return this.pricehistory[this.pricehistory.length];
@@ -77,5 +88,12 @@ class task {
 
     }
 
+    /**
+     * sets the taks to done, also updates the database
+     * @param {date} date_value 
+     */
+    setTaskDone(date_value) {
+        //add done task to database and update here
+    }
 
 }
