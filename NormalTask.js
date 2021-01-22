@@ -17,6 +17,8 @@ class task extends Task {
      * pricehistory and donehistory may not be empty;
      * 
      * @param task needs to refer to task in database;
+     * 
+     * @override
      */
     initialize(task) {
         //acces data from the database
