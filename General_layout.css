@@ -1,0 +1,43 @@
+
+#maintable{
+margin: auto;
+margin-top: 15%;
+}
+
+#personentabel{
+color: blue;
+}
+
+#takentabel{
+color: blue;
+}
+
+#sliderlayout{
+    
+    width:80%;
+    overflow: hidden;
+    font-size: 30px;
+    border-style: dashed;
+    border-color: white;
+    color: blue;
+    font-style: italic;
+    font-weight: normal;
+
+}
+
+body{
+background-color: #de1717;
+font-size: 30px;
+font-weight: bold;
+}
+
+#colomn1{
+    width: 75%;
+}
+
+#ikdoetaak{
+    font-size: 30px;  
+    background-color: cornsilk;
+    padding: 15px 32px;
+}
+
