@@ -18,11 +18,21 @@ class specialTask extends Task {
      * @param {id} task 
      * @override
      */
-    initialize(task) {
+    initialize(task_id) {
         //gets all values from te database and saves it.
         this.price = 1;
         this.name = "specialname";
         this.endTime = Date;
+        this.id = task_id;
+    }
+
+    /**
+     * returns the id of this task as in the database
+     * 
+     * @override
+     */
+    getId() {
+        return this.id;
     }
 
     /**

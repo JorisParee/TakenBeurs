@@ -38,4 +38,11 @@ class task {
 
     }
 
+    /**
+     * gets the id of this task as it is in the database.
+     */
+    getId() {
+
+    }
+
 }

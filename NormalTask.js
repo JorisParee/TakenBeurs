@@ -7,7 +7,7 @@ class task extends Task {
      * 
      * @override
      */
-    constructor(task) {
+    constructor(task_id) {
         super();
         this.initialize(task);
     }
@@ -20,14 +20,22 @@ class task extends Task {
      * 
      * @override
      */
-    initialize(task) {
+    initialize(task_id) {
         //acces data from the database
         this.pricehistory = [];
         this.donehistory = [];
         this.disabled = false;
         this.name = "name";
+        this.id = task_id;
 
 
+    }
+
+    /**
+     * returns the id of this task as in the database
+     */
+    getId() {
+        return this.id;
     }
 
     /**
