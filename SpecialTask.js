@@ -1,4 +1,4 @@
-class specialTask extends Task {
+class specialTask extends task {
 
     /**
      * constructor of th especial task
@@ -6,34 +6,26 @@ class specialTask extends Task {
      * 
      * @override
      */
-    constructor(task) {
+    constructor(task_id) {
         super();
-        initialize();
+        initialize(task_id);
     }
 
 
     /**
      * initalizes all values from the database;
      * 
-     * @param {id} task 
+     * @param {id} task_id
      * @override
      */
     initialize(task_id) {
         //gets all values from te database and saves it.
-        this.price = 1;
+        this.price = 100;
         this.name = "specialname";
         this.endTime = Date;
         this.id = task_id;
     }
 
-    /**
-     * returns the id of this task as in the database
-     * 
-     * @override
-     */
-    getId() {
-        return this.id;
-    }
 
     /**
      * return the current price as a number

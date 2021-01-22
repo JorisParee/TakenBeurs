@@ -10,24 +10,25 @@ class task {
 
     /**
      * sets all values that are needed to set.
+     * both id and name must be set.
      */
-    initialize() {
+    initialize(task) {
 
     }
 
+        
     /**
-     * return the current price of this task
-     * @return number being the last price;
+     * gets the id of this task as it is in the database.
      */
-    getCurrentPrice() {
-
+    getId() {
+        return this.id;
     }
 
     /**
      * returns the name of this task
      */
     getName() {
-
+        return this.name;
     }
 
     /**
@@ -39,10 +40,12 @@ class task {
     }
 
     /**
-     * gets the id of this task as it is in the database.
+     * return the current price of this task
+     * @return number being the last price;
      */
-    getId() {
+    getCurrentPrice() {
 
     }
+
 
 }

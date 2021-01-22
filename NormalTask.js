@@ -1,4 +1,4 @@
-class task extends Task {
+class normalTask extends task {
 
     /**
      * initialies the task with its values
@@ -9,7 +9,7 @@ class task extends Task {
      */
     constructor(task_id) {
         super();
-        this.initialize(task);
+        this.initialize(task_id);
     }
 
     /**
@@ -22,8 +22,8 @@ class task extends Task {
      */
     initialize(task_id) {
         //acces data from the database
-        this.pricehistory = [];
-        this.donehistory = [];
+        this.pricehistory = [1, 2];
+        this.donehistory = [Date, Date];
         this.disabled = false;
         this.name = "name";
         this.id = task_id;
@@ -31,12 +31,6 @@ class task extends Task {
 
     }
 
-    /**
-     * returns the id of this task as in the database
-     */
-    getId() {
-        return this.id;
-    }
 
     /**
      * returns if tast is disabled
@@ -44,6 +38,8 @@ class task extends Task {
     getDisabled() {
         return this.disabled;
     }
+
+
 
     /**
      * set the disabled boolean
