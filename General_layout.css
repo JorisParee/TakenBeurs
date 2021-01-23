@@ -41,3 +41,12 @@ font-weight: bold;
     padding: 15px 32px;
 }
 
+#investbutton{
+    font-size: 30px;
+    background-color: blue;
+    padding: 15px 32px;
+    border:none;
+    color:aqua;
+    border-radius:25px;
+}
+
