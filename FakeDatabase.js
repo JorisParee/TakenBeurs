@@ -7,17 +7,17 @@ var persoon = [];//[naam]
 
 var special = [];//[naam, begindata, eintdata, prijs] not yet active
 
-
+initializeData();
 function initializeData() {
     DB_addTaak("wc", "maak de wc schoon, doe dwielen, doe de pot schoon, voeg wcding toe");//id 0
     DB_addTaak("keuken", "maak de wc schoon, doe dwielen, doe de aanrecht");//id 1
 
     DB_addPrijs(0, 4.20, new Date(2021, 1, 20, 16, 21, 0));//id 0
-    DB_addPrijs(0, 5.0, new Datum(2021, 1, 23, 14, 0, 0));//id 1
-    DB_addPrijs(0, 6.0, new Datum(2021, 1, 24, 14, 0, 0));//id 2
-    DB_addPrijs(0, 5.0, new Datum(2021, 1, 25, 14, 0, 0));//id 3
+    DB_addPrijs(0, 5.0, new Date(2021, 1, 23, 14, 0, 0));//id 1
+    DB_addPrijs(0, 6.0, new Date(2021, 1, 24, 14, 0, 0));//id 2
+    DB_addPrijs(0, 5.0, new Date(2021, 1, 25, 14, 0, 0));//id 3
 
-    DB_addPrijs(1, 200, new Datum(2021, 2, 1, 19, 0, 0));//id 4
+    DB_addPrijs(1, 200, new Date(2021, 2, 1, 19, 0, 0));//id 4
 
     DB_addGedaan(0, 2);//id 0
 
@@ -204,8 +204,8 @@ function DB_getPriceHistoryByTaskId(id) {
  * @param {int} id must be a valid id in the database
  */
 function DB_getTaskNameById(id) {
-    var vartaak =  DB_getTaakById(id);
-    return vartaak[0];
+    var varTaak = DB_getTaakById(id);
+    return varTaak[0];
 }
 
 /**
