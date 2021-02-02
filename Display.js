@@ -26,6 +26,20 @@ function displaySpecials(specials, tabel){
     });
 }
 
+function displayPeople(people, tabel){
+    var tabel = document.getElementById(tabel);
+    tabel.innerHTML = "";
+    var counter = 0;
+    var row;
+    people.forEach(person => {
+        if (counter % 2 == 0) {
+            row = tabel.insertRow(-1);
+        }
+        createRadioButton(person.getName(), person.getId(),'Personbutton', row);
+        counter++;
+    });
+}
+
 function createRadioButton(naam, id, name, rij){
     var cell = rij.insertCell(-1);
     var radio = document.createElement('input');
@@ -42,4 +56,28 @@ function createRadioButton(naam, id, name, rij){
     cell.appendChild(radio);
     cell.appendChild(label);
    
+}
+
+function displaySlideTasks(tasks){
+    var marquee = document.getElementById('sliderlayout');
+    marquee.innerHTML = '';
+    tasks.forEach(task => {
+        marquee.innerHTML += String(task.name)+ ", ";
+    })
+}
+
+function displaySlideSpecials(specials){
+    var marquee = document.getElementById('sliderlayout2');
+    marquee.innerHTML = '';
+    specials.forEach(special => {
+        marquee.innerHTML += String(special.name)+ ", ";
+    })
+}
+
+function displaySlidePeople(people){
+    var marquee = document.getElementById('sliderlayout3');
+    marquee.innerHTML = '';
+    people.forEach(person => {
+        marquee.innerHTML += String(person.name)+ ", ";
+    })
 }

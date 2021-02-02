@@ -6,7 +6,7 @@ class Person{
      * @param {id} person_id 
      */
     constructor(person_id) {
-        initialize(person_id);
+        this.initialize(person_id);
     }
 
     /**
