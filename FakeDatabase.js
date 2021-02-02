@@ -179,6 +179,44 @@ function DB_getPersoonIds() {
 
 
 
+// functions for specific thins with calculatiokns
 
+/**
+ * returns the prices form this task as an array with prices and dates
+ * 
+ * @param {int} id beign a valid task id in the database
+ * @return a list with in it [price, date]. 
+ * TODO order it so it always has oldest date first and newest last.
+ */
+function DB_getPriceHistoryByTaskId(id) {
+    var arr = [];
+    for(var i = 0; i < prijs.length; i++) {
+        if (prijs[i] == id) {
+            arr.push([DB_getPrijsById(i)[1], DB_getPersonById(i)[2]]);
+        }
+    }
+    return arr;
+}
 
+/**
+ * returns the name of this task
+ * 
+ * @param {int} id must be a valid id in the database
+ */
+function DB_getTaskNameById(id) {
+    var vartaak =  DB_getTaakById(id);
+    return vartaak[0];
+}
+
+/**
+ * return the last date this task was executed
+ * 
+ * @param {int} id 
+ * returns date as Date with year, month, day, hour, minute, second
+ * this is the last time this task was done by anyone.
+ */
+function DB_getLastDateDoneFromTaskById(id) {
+    //implement later
+    return new Date(2021, 2, 1, 20, 13, 0);
+}
 

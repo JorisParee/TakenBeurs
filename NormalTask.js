@@ -22,10 +22,9 @@ class normalTask extends task {
      */
     initialize(task_id) {
         //acces data from the database
-        this.pricehistory = [1, 2];
-        this.donehistory = [Date, Date];
-        this.disabled = false;
-        this.name = "name";
+        this.pricehistory = DB_getPriceHistoryByTaskId(task_id);
+        this.lastDate = DB_getLastDateDoneFromTaskById(task_id);//todo calculate
+        this.name = DB_getTaskNameById(task_id);
         this.id = task_id;
 
 
@@ -68,6 +67,7 @@ class normalTask extends task {
      * gets the history of the prices
      * 
      * @return list being the price history, the first value is first price and last value is last known price;
+     * being as a list with values in it: [prijs, datum]
      */
     getPriceHistory() {
         return this.pricehistory;
