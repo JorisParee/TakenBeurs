@@ -1,7 +1,7 @@
 
 #maintable{
 margin: auto;
-margin-top: 15%;
+margin-top: 5%;
 }
 
 #personentabel{
@@ -39,5 +39,14 @@ font-weight: bold;
     font-size: 30px;  
     background-color: cornsilk;
     padding: 15px 32px;
+}
+
+#investbutton{
+    font-size: 30px;
+    background-color: blue;
+    padding: 15px 32px;
+    border:none;
+    color:aqua;
+    border-radius:25px;
 }
 

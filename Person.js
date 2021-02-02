@@ -10,7 +10,7 @@ class Person{
     }
 
     /**
-     * sets all the values for this person gottern from the database;
+     * sets all the values for this person gotten from the database;
      * @param {id} person_id must be a valid id of a person in the database;
      */
     initialize(person_id) {
