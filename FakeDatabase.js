@@ -220,3 +220,13 @@ function DB_getLastDateDoneFromTaskById(id) {
     return new Date(2021, 2, 1, 20, 13, 0);
 }
 
+
+
+/**
+ * returns the name of this person
+ * @param {int} id must be a valid id in the database
+ */
+function DB_getPersonNameById(id) {
+    return DB_getPersonById(id)[0];
+}
+

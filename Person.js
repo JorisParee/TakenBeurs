@@ -15,7 +15,7 @@ class Person{
      */
     initialize(person_id) {
         //gets data from database and initializes the values for this person
-        this.name = "J";
+        this.name = DB_getPersonNameById(person_id);
         this.taskHistory = [];
         this.balance = -200;
         this.id = person_id;
