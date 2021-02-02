@@ -27,25 +27,111 @@ function initializeData() {
 
 }
 
+//add functions
+
+/**
+ * voeg een taak toe aan de database
+ * 
+ * @param {string} naam 
+ * @param {string} beschrijving 
+ * @post deze taak met naam en beschrijving staan nu in de database;
+ */
 function DB_addTaak(naam, beschrijving) {
     var row = [naam, beschrijving];
     taak.push(row);
 }
 
+/**
+ * creates a new instance of prijs to the database
+ * 
+ * @param {int} taak_id must be a valid task id
+ * @param {number} varprijs a number, may be decimal, in euro's
+ * @param {Date} datum a date, must have year, month, day, hour, minute, second.
+ * @post this instance is added to the database
+ */
 function DB_addPrijs(taak_id, varprijs, datum) {
     var row = [taak_id, varprijs, datum];
     prijs.push(row);
 }
 
+/**
+ * creates an new intsnce of gedaan to the database.
+ * 
+ * @param {int} persoon_id must be a valid personid
+ * @param {int} prijs_id must be a valid prijsid
+ * @post this instance is added to the database
+ */
 function DB_addGedaan(persoon_id, prijs_id) {
     var row = [persoon_id, prijs_id];
     gedaan.push(row);
 }
 
+/**
+ * creates an instance of persoon and adds it to the database
+ * 
+ * @param {string} naam 
+ * @post this instance is in the database
+ */
 function DB_addPersoon(naam) {
     var row = [naam];
     persoon.push(row);
 }
+
+
+// get functions
+//by ids
+
+/**
+ * returns the task associated to this id
+ * 
+ * @param {int} id valid id of taak in database
+ * @throws if id is not in database returns false;
+ * 
+ * @returns the task with this id as list [naam, beschrijving]
+ */
+function DB_getTaakById(id) {
+    return taak[id]
+}
+
+/**
+ * returns the prijs associated to this id
+ * 
+ * @param {id} id 
+ * @throws if id is not in database returns false;
+ * 
+ * @returns the prijs with this id as a list [taskid, prijs, datum];
+ */
+function DB_getPrijsById(id) {
+    return prijs[id]
+}
+
+/**
+ * returns the gedaan associated to this id
+ * 
+ * @param {id} id 
+ * @throws if id is not in database returns false;
+ * 
+ * @returns the gedaan with this id as a list [personid, prijsid];
+ */
+function DB_getGedaanById(id) {
+    return gedaan[id]
+}
+
+/**
+ * returns the persoon associated to this id
+ * 
+ * @param {id} id 
+ * @throws if id is not in database returns false;
+ * 
+ * @returns the persoon with this id as a list [naam];
+ */
+function DB_getPersonById(id) {
+    return persoon[id]
+}
+
+
+
+
 
 
 
