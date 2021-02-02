@@ -131,6 +131,53 @@ function DB_getPersonById(id) {
 
 
 
+//get functions for the ids in the databases
+
+/**
+ * returns all id's of the existing taaken in the database
+ */
+function DB_getTaakIds() {
+    var arr = [];
+    for(var i = 0; i < taak.length; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+/**
+ * returns all id's of the existing prijszen in the database
+ */
+function DB_getprijsIds() {
+    var arr = [];
+    for(var i = 0; i < prijs.length; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+/**
+ * returns all id's of the existing gedaan in the database
+ */
+function DB_getGedaanIds() {
+    var arr = [];
+    for(var i = 0; i < gedaan.length; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+/**
+ * returns all id's of the existing taaken in the database
+ */
+function DB_getPersoonIds() {
+    var arr = [];
+    for(var i = 0; i < persoon.length; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+
 
 
 
