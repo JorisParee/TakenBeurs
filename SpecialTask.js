@@ -8,7 +8,7 @@ class specialTask extends task {
      */
     constructor(task_id) {
         super();
-        initialize(task_id);
+        this.initialize(task_id);
     }
 
 
