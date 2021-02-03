@@ -1,4 +1,4 @@
-var a = new normalTask(0);
+/*var a = new normalTask(0);
 var b = new normalTask(1);
 var c = new normalTask(2);
 var d = new normalTask(3);
@@ -32,4 +32,5 @@ Jory.name = 'Jory';
 
 tasks = [a,b,c,d];
 specials = [s,t,u];
-people = [Job,JorisP,JorisA,Joost,Jeffrey,Jory];
+people = [Job,JorisP,JorisA,Joost,Jeffrey,Jory];*/
+
