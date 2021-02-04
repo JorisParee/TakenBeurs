@@ -59,8 +59,9 @@ class normalTask extends task {
      * 
      * @override
      */
-    getCurrentPrice() {
-        return this.pricehistory[this.pricehistory.length];
+    getCurrentPrice = function() {
+        console.log(this.pricehistory);
+        return this.pricehistory[this.pricehistory.length - 1];
     }
 
     /**

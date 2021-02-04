@@ -12,7 +12,7 @@ color: blue;
 color: blue;
 }
 
-#sliderlayout{
+.sliderlayout{
     
     width:80%;
     overflow: hidden;

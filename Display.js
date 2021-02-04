@@ -61,23 +61,29 @@ function createRadioButton(naam, id, name, rij){
 function displaySlideTasks(tasks){
     var marquee = document.getElementById('sliderlayout');
     marquee.innerHTML = '';
+    s = "";
     tasks.forEach(task => {
-        marquee.innerHTML += String(task.name)+ ", ";
+        marquee.innerHTML += s + String(task.name) + ": \u20AC" + String(task.getCurrentPrice());
+        s = ", ";
     })
 }
 
 function displaySlideSpecials(specials){
     var marquee = document.getElementById('sliderlayout2');
     marquee.innerHTML = '';
+    s = "";
     specials.forEach(special => {
-        marquee.innerHTML += String(special.name)+ ", ";
+        marquee.innerHTML += s + String(special.name);
+        s = ", ";
     })
 }
 
 function displaySlidePeople(people){
     var marquee = document.getElementById('sliderlayout3');
     marquee.innerHTML = '';
+    s = "";
     people.forEach(person => {
-        marquee.innerHTML += String(person.name)+ ", ";
+        marquee.innerHTML += s + String(person.name) + ": \u20AC" + String(person.getBalance());
+        s = ", ";
     })
 }

@@ -34,5 +34,18 @@ class Person{
         return this.id;
     }
 
+    /**
+     * gets the balance of a person
+     */
+    getBalance(){
+        var balance = 0;
+        gedaan.forEach(done =>{
+            if(done[0] == this.id){
+                balance += prijs[done[1]][1];
+            }
+        })
+        return balance;
+    }
+
 
 }

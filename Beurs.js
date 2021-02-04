@@ -20,7 +20,7 @@ function initializeTasks(){
     var arr = DB_getTaakIds();
     for(i = 0; i < arr.length; i++){
         var something = DB_getTaakById(i);
-        var taak = new task(i);
+        var taak = new normalTask(i);
         taak.name = something[0];
         tasks.push(taak);
     }
@@ -30,6 +30,8 @@ initializeTasks();
 initializePeople();
 displayPeople(people, "personentabel");
 displayTasks(tasks, "takentabel");
+displaySlideTasks(tasks);
+displaySlidePeople(people);
 
 function taskDone(){
 

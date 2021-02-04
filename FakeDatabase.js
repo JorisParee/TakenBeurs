@@ -23,7 +23,7 @@ function initializeData() {
 
     DB_addPersoon("Joris");//id 0
     DB_addPersoon("Job");//id 1
-    DB_addPersoon("joris II");//id 2
+    DB_addPersoon("Joris II");//id 2
 
 }
 
