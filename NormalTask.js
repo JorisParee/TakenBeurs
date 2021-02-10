@@ -57,11 +57,19 @@ class normalTask extends task {
      * 
      * @return number being the last availible price;
      * 
-     * @override
+     * @returns int:  the current price as a number;
      */
-    getCurrentPrice = function() {
-        console.log(this.pricehistory);
-        return this.pricehistory[this.pricehistory.length - 1];
+    getCurrentPrice() {
+        return this.pricehistory[this.pricehistory.length-1][0];
+    }
+
+    /**
+     * returns the last date the task was done
+     * 
+     * @return the last date someone did the task
+     */
+    getLastDate(){
+        return new Date(2021, 2, 1, 20, 13, 0);
     }
 
     /**

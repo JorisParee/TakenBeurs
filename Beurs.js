@@ -28,11 +28,10 @@ function initializeTasks(){
 
 initializeTasks();
 initializePeople();
-displayPeople(people, "personentabel");
-displayTasks(tasks, "takentabel");
-displaySlideTasks(tasks);
-displaySlidePeople(people);
 
+makeBasicWebsite(tasks);
+//document.body.appendChild(createCanvas("task" + String(tasks[0].id), "img", "aria"+String(tasks[0].name)));
+//createGraphByTask(tasks[0])
 function taskDone(){
 
 }

@@ -1,7 +1,7 @@
 
-#maintable{
-margin: auto;
+table, th, td{
 margin-top: 5%;
+border: 1px solid black;
 }
 
 #personentabel{
@@ -48,5 +48,16 @@ font-weight: bold;
     border:none;
     color:aqua;
     border-radius:25px;
+}
+.defaultBut{
+    font-size: 30px;
+    background-color: blue;
+    padding: 15px 32px;
+    border:none;
+    color:aqua;
+    border-radius:25px;
+}
+.redBut{
+    background-color: red;
 }
 

@@ -191,8 +191,8 @@ function DB_getPersoonIds() {
 function DB_getPriceHistoryByTaskId(id) {
     var arr = [];
     for(var i = 0; i < prijs.length; i++) {
-        if (prijs[i] == id) {
-            arr.push([DB_getPrijsById(i)[1], DB_getPersonById(i)[2]]);
+        if (prijs[i][0] == id) {
+            arr.push([DB_getPrijsById(i)[1], DB_getPrijsById(i)[2]]);
         }
     }
     return arr;
