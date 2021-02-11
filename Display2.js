@@ -1,7 +1,8 @@
-function createButton(name, list){
+function createButton(name, id, list){
     var button = document.createElement("input");
     button.type = "submit";
     button.value = name;
+    button.id = id;
     button.className = 'defaultBut';
     if(list['class']){
         button.className = list['class'];
@@ -85,4 +86,22 @@ function dateToString(date){
     var month = date.getMonth();
     var day = date.getDate();
     return String(day) + "-" + String(month+1) + "-" + String(year)
+}
+
+function addEnter(htmlelement){
+    var p = document.createElement('p');
+    p.innerText = "\n";
+    htmlelement.appendChild(p);
+}
+
+function makeModal(){
+    var modal = document.createElement('div');
+    modal.id = 'taskModal';
+    modal.className = 'modal';
+    var modalcontent = document.createElement('div');
+    modalcontent.className = 'modal-content';
+    modalcontent.appendChild(createButton('JOOO','modalBut', {'class':'redBut'}));
+    modal.appendChild(modalcontent);
+    document.body.appendChild(modal);
+    
 }

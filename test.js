@@ -33,4 +33,3 @@ Jory.name = 'Jory';
 tasks = [a,b,c,d];
 specials = [s,t,u];
 people = [Job,JorisP,JorisA,Joost,Jeffrey,Jory];*/
-

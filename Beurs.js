@@ -29,7 +29,20 @@ function initializeTasks(){
 initializeTasks();
 initializePeople();
 
-makeBasicWebsite(tasks);
+makeBasicWebsite(tasks, people);
+makeModal();
+var button = document.getElementById('Task0but');
+var modal = document.getElementById('taskModal');
+
+    button.onclick = function() {
+        modal.style.display = "block";
+      }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+    }
 //document.body.appendChild(createCanvas("task" + String(tasks[0].id), "img", "aria"+String(tasks[0].name)));
 //createGraphByTask(tasks[0])
 function taskDone(){
