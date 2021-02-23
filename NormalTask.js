@@ -26,7 +26,7 @@ class normalTask extends task {
         this.lastDate = DB_getLastDateDoneFromTaskById(task_id);//todo calculate
         this.name = DB_getTaskNameById(task_id);
         this.id = task_id;
-
+        this.description = DB_getTaakById(task_id)[1];
 
     }
 
@@ -86,7 +86,7 @@ class normalTask extends task {
     /**
      * calculates a new prices and sets it.
      */
-    setNewPrice() {
+    setNewPrice(date) {
         //todo change grow, now always 5%
         var newprice;
         newprice = this.getCurrentPrice() * 1.05;
@@ -100,7 +100,7 @@ class normalTask extends task {
      * @param {date} date_value 
      */
     updateNewPrice(price_int, date_value) {
-
+        DB_addPrijs(this.id, price_int, date_value);
     }
 
     /**
@@ -109,6 +109,9 @@ class normalTask extends task {
      */
     setTaskDone(date_value) {
         //add done task to database and update here
+        var newprice = this.getCurrentPrice() * 0.9;
+        this.updateNewPrice(newprice, date_value);
+        this.setDisabled(true);
     }
 
 }

@@ -56,7 +56,6 @@ function createGraphByTask(task){
     for(i = 0; i < priceHistory.length; i++){
         prices.push(priceHistory[i][0]);
         dates.push(dateToString(priceHistory[i][1]));
-        console.log(priceHistory[i][1]);
     }
 
     createGraph("task" + String(task.id), prices, dates)
@@ -94,14 +93,71 @@ function addEnter(htmlelement){
     htmlelement.appendChild(p);
 }
 
-function makeModal(){
+function makeModal(modalid, id, description){
     var modal = document.createElement('div');
-    modal.id = 'taskModal';
+    modal.id = modalid;
     modal.className = 'modal';
-    var modalcontent = document.createElement('div');
-    modalcontent.className = 'modal-content';
-    modalcontent.appendChild(createButton('JOOO','modalBut', {'class':'redBut'}));
+    var modalcontent = makeModalContent(modalid, id, description);
+    
     modal.appendChild(modalcontent);
     document.body.appendChild(modal);
+    
+}
+
+function makeSpan(className, id){
+    var span = document.createElement('span');
+    span.className = className;
+    span.id = id;
+    span.innerHTML = '&times;';
+    return span;
+}
+
+function makeModalContent(modalid, id, description){
+    var modalcontent = document.createElement('div');
+    modalcontent.className = 'modal-content';
+    modalcontent.appendChild(makeSpan('close', modalid + 'span'));
+    var tabel = document.createElement('table');
+    var counter = 0;
+    var row;
+    people.forEach(person => {
+        if(counter % 3 == 0){
+            row = tabel.insertRow(-1);
+        }
+        var cell = row.insertCell(-1);
+        cell.appendChild(createRadioButton(person.getName(),person.getId(), 'Personbut')[0]);
+        cell.appendChild(createRadioButton(person.getName(),person.getId(), 'Personbut')[1]);
+        counter ++;
+    })
+    modalcontent.appendChild(tabel);
+    var p = document.createElement('p');
+    p.innerText = description;
+    modalcontent.appendChild(p);
+    var button = createButton('Helemaal klaar Joh','modalBut', {'class':'redBut'});
+    modalcontent.appendChild(button);
+    button.onclick = function(){
+        var task = tasks[id];
+        task.setTaskDone(new Date());
+        var radio = document.getElementsByName('Personbut');
+        var person;
+        radio.forEach(but =>{
+            if(but.checked){
+                person = people[but.id];
+            }
+        });
+        console.log(person.name);
+    }
+    return modalcontent;    
+}
+
+function modalClick(taskid){
+    var task = tasks[taskid];
+    task.setTaskDone(new Date());
+    var radio = document.getElementsByName('Personbut');
+    var person;
+    radio.forEach(but =>{
+        if(but.checked){
+            person = but.id;
+        }
+    });
     
 }

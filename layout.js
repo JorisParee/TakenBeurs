@@ -1,5 +1,4 @@
 function makeTasksWebsite(tasks){
-    console.log(tasks);
     var maintable = document.createElement('table');
     document.body.appendChild(maintable);
     var row;
@@ -13,6 +12,16 @@ function makeTasksWebsite(tasks){
         cell2.appendChild(createInfo(task)[1])
         cell3 = row.insertCell(-1);
         cell3.appendChild(createButton("Doe Taak!", "Task"+ task.id+"but", {}));
+        makeModal('Task'+task.id+'modal',task.id, task.description);       
+        var button = document.getElementById('Task'+task.id+'but');
+        var modal = document.getElementById('Task'+task.id+'modal');
+        var span = document.getElementById('Task'+task.id+'modalspan');
+        button.onclick = function() {
+            modal.style.display = "block";
+        }
+        span.onclick = function() {
+              modal.style.display = "none";
+        }
     });
     
 }
