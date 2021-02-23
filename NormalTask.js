@@ -100,8 +100,7 @@ class normalTask extends task {
      * @param {date} date_value 
      */
     updateNewPrice(price_int, date_value) {
-        DB_addPrijs(this.id, price_int, date_value);
-        
+        DB_addPrijs(this.id, price_int, date_value);    
     }
 
     update(){

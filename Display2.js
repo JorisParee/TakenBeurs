@@ -112,7 +112,7 @@ function makeSpan(className, id){
     return span;
 }
 
-function makeModalContent(modalid, id, description){
+function makeModalContent(modalid, task_id, description){
     var modalcontent = document.createElement('div');
     modalcontent.className = 'modal-content';
     modalcontent.appendChild(makeSpan('close', modalid + 'span'));
@@ -135,23 +135,14 @@ function makeModalContent(modalid, id, description){
     var button = createButton('Helemaal klaar Joh','modalBut', {'class':'redBut'});
     modalcontent.appendChild(button);
     button.onclick = function(){
-        var task = tasks[id];
-        task.setTaskDone(new Date());
-        var radio = document.getElementsByName('Personbut');
-        var person;
-        radio.forEach(but =>{
-            if(but.checked){
-                person = people[but.id];
-            }
-        });
-        console.log(person.name);
-        console.log(task.getPriceHistory());
+        modalClick(task_id);    
     }
     return modalcontent;    
 }
 
 function modalClick(taskid){
     var task = tasks[taskid];
+    var prijsid = DB_addPrijs(task.id, task.getCurrentPrice(), new Date());
     task.setTaskDone(new Date());
     var radio = document.getElementsByName('Personbut');
     var person;
@@ -160,5 +151,5 @@ function modalClick(taskid){
             person = but.id;
         }
     });
-    DB_addGedaan(person.id, )
+    DB_addGedaan(person.id, prijsid);
 }
