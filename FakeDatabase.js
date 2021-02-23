@@ -35,10 +35,12 @@ function initializeData() {
  * @param {string} naam 
  * @param {string} beschrijving 
  * @post deze taak met naam en beschrijving staan nu in de database;
+ * @returns the id of the last created taak
  */
 function DB_addTaak(naam, beschrijving) {
     var row = [naam, beschrijving];
     taak.push(row);
+    return taak.length - 1;
 }
 
 /**
@@ -48,10 +50,12 @@ function DB_addTaak(naam, beschrijving) {
  * @param {number} varprijs a number, may be decimal, in euro's
  * @param {Date} datum a date, must have year, month, day, hour, minute, second.
  * @post this instance is added to the database
+ * @returns the id of the just created price.
  */
 function DB_addPrijs(taak_id, varprijs, datum) {
     var row = [taak_id, varprijs, datum];
     prijs.push(row);
+    return prijs.length - 1;
 }
 
 /**
@@ -60,10 +64,12 @@ function DB_addPrijs(taak_id, varprijs, datum) {
  * @param {int} persoon_id must be a valid personid
  * @param {int} prijs_id must be a valid prijsid
  * @post this instance is added to the database
+ * @return the id of the just created gedaan
  */
 function DB_addGedaan(persoon_id, prijs_id) {
     var row = [persoon_id, prijs_id];
     gedaan.push(row);
+    return gedaan.length - 1;
 }
 
 /**
