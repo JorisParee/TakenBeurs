@@ -68,8 +68,11 @@ function createInfo(task){
     p.innerText = "\u20AC"+price;
     var p2 = document.createElement('p');
     p2.innerText = dateToString(lastDate);
+    var div = document.createElement('div');
+    div.appendChild(p);
+    div.appendChild(p2);
 
-    return [p,p2]
+    return div
 }
 
 function createCanvas(id, role, aria){
@@ -101,7 +104,7 @@ function makeModal(modalid, id, description){
     
     modal.appendChild(modalcontent);
     document.body.appendChild(modal);
-    
+    return modal;
 }
 
 function makeSpan(className, id){
@@ -135,7 +138,9 @@ function makeModalContent(modalid, task_id, description){
     var button = createButton('Helemaal klaar Joh','modalBut', {'class':'redBut'});
     modalcontent.appendChild(button);
     button.onclick = function(){
-        modalClick(task_id);    
+        modalClick(task_id);
+        var modal = document.getElementById(modalid);
+        modal.remove();    
     }
     return modalcontent;    
 }
@@ -145,11 +150,51 @@ function modalClick(taskid){
     var prijsid = DB_addPrijs(task.id, task.getCurrentPrice(), new Date());
     task.setTaskDone(new Date());
     var radio = document.getElementsByName('Personbut');
-    var person;
+    var person_id = false;
     radio.forEach(but =>{
         if(but.checked){
-            person = but.id;
+            person_id = but.id;
         }
     });
-    DB_addGedaan(person.id, prijsid);
+    if(person_id != false){
+    DB_addGedaan(person_id, prijsid);
+    updateTask(task, document.getElementById(task.id));
+    updateLeaderBoard(people);
+    console.log(task.getPriceHistory());
+    console.log(people[person_id].getBalance());
+    }
+}
+
+function updateTask(task, row){
+    row.innerHTML = "";
+    cell = row.insertCell(-1);
+    cell.appendChild(createCanvas("task" + String(task.id), "img", "aria"+String(task.name)));
+    createGraphByTask(task);
+    cell2 = row.insertCell(-1);
+    cell2.appendChild(createInfo(task))
+    cell3 = row.insertCell(-1);
+    var button = createButton("Doe Taak!", "Task"+ task.id+"but", {})
+    cell3.appendChild(button);
+    button.disabled = task.getDisabled();
+    button.onclick = function() {
+        var modal = makeModal('Task'+task.id+'modal',task.id, task.description);       
+        var span = document.getElementById('Task'+task.id+'modalspan');
+        modal.style.display = "block";
+        span.onclick = function() {
+            modal.remove();
+        }
+    
+        
+    }
+    
+}
+
+function updateLeaderBoard(people){
+    slider = document.getElementById('slider');
+    slider.innerHTML = '';
+    s = "";
+    people.forEach(person => {
+        slider.innerHTML += s + String(person.name) + ": \u20AC" + String(person.getBalance());
+        s = ", ";
+    })
 }

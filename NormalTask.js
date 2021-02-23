@@ -69,7 +69,7 @@ class normalTask extends task {
      * @return the last date someone did the task
      */
     getLastDate(){
-        return new Date(2021, 2, 1, 20, 13, 0);
+        return this.pricehistory[this.pricehistory.length-1][1];
     }
 
     /**
