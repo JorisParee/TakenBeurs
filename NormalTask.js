@@ -101,8 +101,13 @@ class normalTask extends task {
      */
     updateNewPrice(price_int, date_value) {
         DB_addPrijs(this.id, price_int, date_value);
+        
     }
 
+    update(){
+        this.pricehistory = DB_getPriceHistoryByTaskId(this.id);
+        this.lastDate = DB_getLastDateDoneFromTaskById(this.id);
+    }
     /**
      * sets the taks to done, also updates the database
      * @param {date} date_value 
@@ -111,6 +116,7 @@ class normalTask extends task {
         //add done task to database and update here
         var newprice = this.getCurrentPrice() * 0.9;
         this.updateNewPrice(newprice, date_value);
+        this.update();
         this.setDisabled(true);
     }
 

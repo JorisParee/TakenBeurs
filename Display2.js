@@ -145,6 +145,7 @@ function makeModalContent(modalid, id, description){
             }
         });
         console.log(person.name);
+        console.log(task.getPriceHistory());
     }
     return modalcontent;    
 }
@@ -159,5 +160,5 @@ function modalClick(taskid){
             person = but.id;
         }
     });
-    
+    DB_addGedaan(person.id, )
 }
