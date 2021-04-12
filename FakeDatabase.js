@@ -236,3 +236,12 @@ function DB_getPersonNameById(id) {
     return DB_getPersonById(id)[0];
 }
 
+function voorbeeldCallback(callback){
+    var waardeUitDBpakken = 1;
+    callback(waardeUitDBpakken);
+}
+
+voorbeeldCallback(function(nummertje){
+    console.log(nummertje);
+})
+
