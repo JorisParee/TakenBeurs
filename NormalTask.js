@@ -119,4 +119,12 @@ class normalTask extends task {
         this.setDisabled(true);
     }
 
+    isTaskDisabled(){
+        var lastDate = this.getLastDate();
+        var today = new Date();
+        if(today - lastDate >= new Date(604800)){
+            this.setDisabled(false);
+        }
+    }
+
 }

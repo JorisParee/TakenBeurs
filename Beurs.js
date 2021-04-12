@@ -29,6 +29,7 @@ function initializeTasks(){
 initializeTasks();
 initializePeople();
 
+
 makeBasicWebsite(tasks, people);
 
 function taskDone(){

@@ -5,6 +5,7 @@ function makeTasksWebsite(tasks){
         var row  = maintable.insertRow(-1);
         row.id = task.id;
         updateTask(task, row)
+        console.log(row);
     });
     
 }

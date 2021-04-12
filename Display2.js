@@ -160,8 +160,6 @@ function modalClick(taskid){
     DB_addGedaan(person_id, prijsid);
     updateTask(task, document.getElementById(task.id));
     updateLeaderBoard(people);
-    console.log(task.getPriceHistory());
-    console.log(people[person_id].getBalance());
     }
 }
 
@@ -175,6 +173,7 @@ function updateTask(task, row){
     cell3 = row.insertCell(-1);
     var button = createButton("Doe Taak!", "Task"+ task.id+"but", {})
     cell3.appendChild(button);
+    task.isTaskDisabled();
     button.disabled = task.getDisabled();
     button.onclick = function() {
         var modal = makeModal('Task'+task.id+'modal',task.id, task.description);       
@@ -182,9 +181,7 @@ function updateTask(task, row){
         modal.style.display = "block";
         span.onclick = function() {
             modal.remove();
-        }
-    
-        
+        }   
     }
     
 }
