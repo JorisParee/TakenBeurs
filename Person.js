@@ -5,19 +5,14 @@ class Person{
      * initializes this person
      * @param {id} person_id 
      */
-    constructor(person_id) {
-        this.initialize(person_id);
+    constructor(data) {
+        var obj = JSON.parse(data)
+        this.id = obj.id
+        this.name = obj.name
+        this.balance = 0;
     }
 
-    /**
-     * sets all the values for this person gotten from the database;
-     * @param {id} person_id must be a valid id of a person in the database;
-     */
-    initialize(person_id) {
-        //gets data from database and initializes the values for this person
-        this.name = DB_getPersonNameById(person_id);
-        this.id = person_id;
-    }
+    
 
     /**
      * gets the name from this person
@@ -37,14 +32,21 @@ class Person{
     /**
      * gets the balance of a person
      */
-    getBalance(){
-        var balance = 0;
-        gedaan.forEach(done =>{
-            if(done[0] == this.id){
-                balance += prijs[done[1]][1];
-            }
+    setBalance(){
+        this.balance = 0;
+        DB_getGedaanIdsByUserId(this.id, function(data){
+            var obj = JSON.parse(data);
+            DB_getPriceById(obj.priceid, function(data){
+                var object = JSON.parse(data)
+                this.balance += object.price
+            })
         })
-        return balance;
+    }
+
+    static load(id){
+        DB_getPersonByID(id, function(data){
+            new Person(data)
+        })
     }
 
 

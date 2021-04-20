@@ -1,5 +1,5 @@
 //this will be a site where we show the prices for tasks done 
-// this will increse and decrese as if it were a stock for each task
+// this will increase and decrease as if it were a stock for each task
 var people = [];
 var tasks = [];
 var specials = [];
@@ -16,14 +16,11 @@ function initializePeople(){
 }  
 
 function initializeTasks(){
-    tasks = [];
-    var arr = DB_getTaakIds();
-    for(i = 0; i < arr.length; i++){
-        var something = DB_getTaakById(i);
-        var taak = new normalTask(i);
-        taak.name = something[0];
+    for(i = 0; i < 6; i++){
+        taak = task.load(i);
         tasks.push(taak);
     }
+    
 } 
 
 initializeTasks();
@@ -32,8 +29,5 @@ initializePeople();
 
 makeBasicWebsite(tasks, people);
 
-function taskDone(){
-
-}
 
 

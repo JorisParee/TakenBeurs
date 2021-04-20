@@ -1,21 +1,16 @@
 class task {
 
     /**
-     * initializes the task and checks if correct id;
-     * @param {id} task 
+     * initializes the task;
+     * @param data
      */
-    constructor(task) {
-        //check if task is in database
+    constructor(data) {
+        //set the initial values of the task
+        var obj = JSON.parse(data)
+        this.id = obj.id;
+        this.name = obj.name;
+        this.description = this.description;
     }
-
-    /**
-     * sets all values that are needed to set.
-     * both id and name must be set.
-     */
-    initialize(task) {
-
-    }
-
         
     /**
      * gets the id of this task as it is in the database.
@@ -47,5 +42,13 @@ class task {
 
     }
 
-
+    static load(id){
+        DB_getTaakByID(id, function(data){
+            new task(data)
+        })
+    }
 }
+
+
+
+
