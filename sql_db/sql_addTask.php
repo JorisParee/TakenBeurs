@@ -8,12 +8,14 @@ $name = mysql_real_escape_string($name);
 $description = $_POST['description'];
 $description = mysql_real_escape_string($description);
 
-$query = "INSERT INTO task (name, description) VALUES ('".$name."','".$description."');";
+$query = "INSERT INTO `task` (`name`, `description`) VALUES ('".$name."','".$description."');";
 
-if ($conn->query($sql) === TRUE) {
-    echo "New task created successfully";
+if ($conn->query($query) === TRUE) {
+    echo "Succes";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $query . "<br>" . $conn->error;
 }
+
+include("sql_close.php");
 
 ?>

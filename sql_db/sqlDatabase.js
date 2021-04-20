@@ -22,7 +22,7 @@ function DB_addTaak(naam, beschrijving) {
     data.append("name", naam);
     data.append("beschrijving", beschrijving);
 
-    fetch("/sql_addUser.php", {
+    fetch("/sql_addTask.php", {
         method: 'post',
         body: data
     })
@@ -51,7 +51,7 @@ function DB_addPrijs(taak_id, prijs, datum) {
     data.append("prijs", prijs);
     data.append("datum", datum);
 
-    fetch("/sql_addUser.php", {
+    fetch("/sql_addPrice.php", {
         method: 'post',
         body: data
     })
@@ -134,11 +134,11 @@ function DB_addPersoon(naam) {
  * 
  * @returns the task with this id as list [naam, beschrijving]
  */
-function DB_getTaakById(callback, id) {
+function DB_getTaakById(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
-    fetch("/sql_addUser.php", {
+    fetch("/sql_getTaskById.php", {
         method: 'post',
         body: data
     })
@@ -162,7 +162,7 @@ function DB_getTaakById(callback, id) {
  * 
  * @returns the prijs with this id as a list [taskid, prijs, datum];
  */
-function DB_getPrijsById(callback, id) {
+function DB_getPrijsById(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
@@ -190,7 +190,7 @@ function DB_getPrijsById(callback, id) {
  * 
  * @returns the gedaan with this id as a list [personid, prijsid];
  */
-function DB_getGedaanById(callback, id) {
+function DB_getGedaanById(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
@@ -218,7 +218,7 @@ function DB_getGedaanById(callback, id) {
  * 
  * @returns the persoon with this id as a list [naam];
  */
-function DB_getPersonById(callback, id) {
+function DB_getPersonById(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
@@ -266,7 +266,7 @@ function DB_getTaakIds() {
 /**
  * returns all id's of the existing prijszen in the database
  */
-function DB_getPrijsIdsByTaskId(callback, id) {
+function DB_getPrijsIdsByTaskId(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
@@ -289,7 +289,7 @@ function DB_getPrijsIdsByTaskId(callback, id) {
 /**
  * returns all id's of the existing gedaan in the database
  */
-function DB_getGedaanIdsByTaskId(callback, id) {
+function DB_getGedaanIdsByTaskId(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
@@ -312,7 +312,7 @@ function DB_getGedaanIdsByTaskId(callback, id) {
 /**
  * returns all id's of the exitsting gedaans done by a specific person
  */
-function DB_getGedaanIdsByUserId(callback, id) {
+function DB_getGedaanIdsByUserId(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
