@@ -7,11 +7,6 @@
 // 
 // var special = [];//[naam, begindata, eintdata, prijs] not yet active
 
-initializeData();
-function initializeData() {
-
-
-}
 
 //add functions
 
@@ -23,8 +18,23 @@ function initializeData() {
  * @post deze taak met naam en beschrijving staan nu in de database;
  */
 function DB_addTaak(naam, beschrijving) {
+    var data = new URLSearchParams();
+    data.append("name", naam);
+    data.append("beschrijving", beschrijving);
 
-    
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
 }
 
 /**
@@ -35,8 +45,25 @@ function DB_addTaak(naam, beschrijving) {
  * @param {Date} datum a date, must have year, month, day, hour, minute, second.
  * @post this instance is added to the database
  */
-function DB_addPrijs(taak_id, varprijs, datum) {
+function DB_addPrijs(taak_id, prijs, datum) {
+    var data = new URLSearchParams();
+    data.append("taak_id", taak_id);
+    data.append("prijs", prijs);
+    data.append("datum", datum);
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
     
 }
 
@@ -48,7 +75,23 @@ function DB_addPrijs(taak_id, varprijs, datum) {
  * @post this instance is added to the database
  */
 function DB_addGedaan(persoon_id, prijs_id) {
+    var data = new URLSearchParams();
+    data.append("persoon_id", persoon_id);
+    data.append("prijs_id", prijs_id);
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
     
 }
 
@@ -58,11 +101,10 @@ function DB_addGedaan(persoon_id, prijs_id) {
  * @param {string} naam 
  * @post this instance is in the database
  */
+/*
 function DB_addPersoon(naam) {
     var data = new URLSearchParams();
-    data.append('name', naam);
-
-    var succesfull = false;
+    data.append("name", naam);
 
     fetch("/sql_addUser.php", {
         method: 'post',
@@ -72,19 +114,13 @@ function DB_addPersoon(naam) {
         return response.text();
     })
     .then(function (text) {
-        if (text.startsWith("succesfull")) {
-            succesfull = true;
-        } else {
-            console.log(text);
-        }
     })
     .catch( function (error) {
         console.log(error);
     })
-
-    return succesfull;
     
 }
+*/
 
 
 // get functions
@@ -98,8 +134,23 @@ function DB_addPersoon(naam) {
  * 
  * @returns the task with this id as list [naam, beschrijving]
  */
-function DB_getTaakById(id) {
+function DB_getTaakById(callback, id) {
+    var data = new URLSearchParams();
+    data.append("id", id);
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
     
 }
 
@@ -111,8 +162,23 @@ function DB_getTaakById(id) {
  * 
  * @returns the prijs with this id as a list [taskid, prijs, datum];
  */
-function DB_getPrijsById(id) {
+function DB_getPrijsById(callback, id) {
+    var data = new URLSearchParams();
+    data.append("id", id);
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
     
 }
 
@@ -124,8 +190,23 @@ function DB_getPrijsById(id) {
  * 
  * @returns the gedaan with this id as a list [personid, prijsid];
  */
-function DB_getGedaanById(id) {
+function DB_getGedaanById(callback, id) {
+    var data = new URLSearchParams();
+    data.append("id", id);
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
     
 }
 
@@ -137,8 +218,23 @@ function DB_getGedaanById(id) {
  * 
  * @returns the persoon with this id as a list [naam];
  */
-function DB_getPersonById(id) {
+function DB_getPersonById(callback, id) {
+    var data = new URLSearchParams();
+    data.append("id", id);
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
 }
 
 
@@ -149,79 +245,113 @@ function DB_getPersonById(id) {
  * returns all id's of the existing taaken in the database
  */
 function DB_getTaakIds() {
+    var data = new URLSearchParams();
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
     
 }
 
 /**
  * returns all id's of the existing prijszen in the database
  */
-function DB_getprijsIds() {
+function DB_getPrijsIdsByTaskId(callback, id) {
+    var data = new URLSearchParams();
+    data.append("id", id);
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
     
 }
 
 /**
  * returns all id's of the existing gedaan in the database
  */
-function DB_getGedaanIds() {
+function DB_getGedaanIdsByTaskId(callback, id) {
+    var data = new URLSearchParams();
+    data.append("id", id);
 
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
     
 }
+
+/**
+ * returns all id's of the exitsting gedaans done by a specific person
+ */
+function DB_getGedaanIdsByUserId(callback, id) {
+    var data = new URLSearchParams();
+    data.append("id", id);
+
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
+}
+
+
 
 /**
  * returns all id's of the existing taaken in the database
  */
 function DB_getPersoonIds() {
+    var data = new URLSearchParams();
 
-    
+    fetch("/sql_addUser.php", {
+        method: 'post',
+        body: data
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        callback(json);
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
 }
 
-
-
-// functions for specific thins with calculatiokns
-
-/**
- * returns the prices form this task as an array with prices and dates
- * 
- * @param {int} id beign a valid task id in the database
- * @return a list with in it [price, date]. 
- * TODO order it so it always has oldest date first and newest last.
- */
-function DB_getPriceHistoryByTaskId(id) {
-
-    
-}
-
-/**
- * returns the name of this task
- * 
- * @param {int} id must be a valid id in the database
- */
-function DB_getTaskNameById(id) {
-
-    
-}
-
-/**
- * return the last date this task was executed
- * 
- * @param {int} id 
- * returns date as Date with year, month, day, hour, minute, second
- * this is the last time this task was done by anyone.
- */
-function DB_getLastDateDoneFromTaskById(id) {
-
-    
-}
-
-
-
-/**
- * returns the name of this person
- * @param {int} id must be a valid id in the database
- */
-function DB_getPersonNameById(id) {
-
-}
 
