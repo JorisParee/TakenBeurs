@@ -5,11 +5,14 @@ class Person{
      * initializes this person
      * @param {id} person_id 
      */
-    constructor(data) {
+    constructor(id) {//will be data later on
+        /*
         var obj = JSON.parse(data)
         this.id = obj.id
         this.name = obj.name
         this.balance = 0;
+        */
+       this.id = id;
     }
 
     
