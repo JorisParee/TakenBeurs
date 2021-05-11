@@ -53,7 +53,7 @@ function createGraphByTask(task){
     var priceHistory = task.getPriceHistory();
     var prices = [];
     var dates = [];
-    for(i = 0; i < priceHistory.length; i++){
+    for(var i = 0; i < priceHistory.length; i++){
         prices.push(priceHistory[i][0]);
         dates.push(dateToString(priceHistory[i][1]));
     }
@@ -165,12 +165,12 @@ function modalClick(taskid){
 
 function updateTask(task, row){
     row.innerHTML = "";
-    cell = row.insertCell(-1);
+    var cell = row.insertCell(-1);
     cell.appendChild(createCanvas("task" + String(task.id), "img", "aria"+String(task.name)));
     createGraphByTask(task);
-    cell2 = row.insertCell(-1);
+    var cell2 = row.insertCell(-1);
     cell2.appendChild(createInfo(task))
-    cell3 = row.insertCell(-1);
+    var cell3 = row.insertCell(-1);
     var button = createButton("Doe Taak!", "Task"+ task.id+"but", {})
     cell3.appendChild(button);
     task.isTaskDisabled();
@@ -187,9 +187,9 @@ function updateTask(task, row){
 }
 
 function updateLeaderBoard(people){
-    slider = document.getElementById('slider');
+    var slider = document.getElementById('slider');
     slider.innerHTML = '';
-    s = "";
+    var s = "";
     people.forEach(person => {
         slider.innerHTML += s + String(person.name) + ": \u20AC" + String(person.getBalance());
         s = ", ";

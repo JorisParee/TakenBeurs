@@ -1,12 +1,3 @@
-//create all tables as arrays with the id the index and in there the values as new array
-
-// var taak = [];//[naam, beschrijving]
-// var prijs = [];//[task_id, prijs, datum]
-// var gedaan = [];//[persoon_id, prijs_id];
-// var persoon = [];//[naam]
-// 
-// var special = [];//[naam, begindata, eintdata, prijs] not yet active
-
 
 //add functions
 
@@ -17,6 +8,7 @@
  * @param {string} beschrijving 
  * @post deze taak met naam en beschrijving staan nu in de database;
  */
+/*
 function DB_addTaak(naam, beschrijving) {
     var data = new URLSearchParams();
     data.append("name", naam);
@@ -36,6 +28,9 @@ function DB_addTaak(naam, beschrijving) {
         console.log(error);
     })
 }
+*/
+
+
 
 /**
  * creates a new instance of prijs to the database
@@ -79,7 +74,7 @@ function DB_addGedaan(persoon_id, prijs_id) {
     data.append("persoon_id", persoon_id);
     data.append("prijs_id", prijs_id);
 
-    fetch("/sql_addUser.php", {
+    fetch("/sql_addCompleted.php", {
         method: 'post',
         body: data
     })

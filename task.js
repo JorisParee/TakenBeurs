@@ -43,7 +43,7 @@ class task {
     }
 
     static load(id){
-        DB_getTaakByID(id, function(data){
+        DB_getTaakById(id, function(data){
             new task(data)
         })
     }

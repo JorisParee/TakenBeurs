@@ -15,7 +15,7 @@ function makeLeaderBoardWebsite(people){
     slider.id = 'slider';
     slider.className = 'sliderlayout';
     slider.innerHTML = '';
-    s = "";
+    var s = "";
     people.forEach(person => {
         slider.innerHTML += s + String(person.name) + ": \u20AC" + String(person.getBalance());
         s = ", ";

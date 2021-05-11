@@ -3,28 +3,27 @@
 include("sql_connect.php");
 
 $id = $_POST['id'];
-$id = mysql_real_escape_string($id);
+$id = $conn->real_escape_string($id);
 
 $query = "SELECT `id`, `name`, `description` FROM `task` WHERE `id` = '".$id."' ;";
 
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
-// output data of each row
-$row = $result->fetch_assoc();
-//should only be one row.
+    // output data of each row, should only be one row.
 
-$return -> id =  $row["id"];
-$return -> name = $row["name"];
-$return -> description = $row["description"];
+    $row = $result->fetch_assoc();
 
-$json = json_encode($return);
+    $return -> id =  $row["id"];
+    $return -> name = $row["name"];
+    $return -> description = $row["description"];
 
-echo $json;
+    $json = json_encode($return);
 
+    echo $json;
 
 } else {
-echo "Error: 0 results";
+    echo "Error: 0 results";
 }
 
 

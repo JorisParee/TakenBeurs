@@ -61,7 +61,7 @@ function createRadioButton(naam, id, name, rij){
 function displaySlideTasks(tasks){
     var marquee = document.getElementById('sliderlayout');
     marquee.innerHTML = '';
-    s = "";
+    let s = "";
     tasks.forEach(task => {
         marquee.innerHTML += s + String(task.name) + ": \u20AC" + String(task.getCurrentPrice());
         s = ", ";
@@ -71,7 +71,7 @@ function displaySlideTasks(tasks){
 function displaySlideSpecials(specials){
     var marquee = document.getElementById('sliderlayout2');
     marquee.innerHTML = '';
-    s = "";
+    let s = "";
     specials.forEach(special => {
         marquee.innerHTML += s + String(special.name);
         s = ", ";
@@ -81,7 +81,7 @@ function displaySlideSpecials(specials){
 function displaySlidePeople(people){
     var marquee = document.getElementById('sliderlayout3');
     marquee.innerHTML = '';
-    s = "";
+    let s = "";
     people.forEach(person => {
         marquee.innerHTML += s + String(person.name) + ": \u20AC" + String(person.getBalance());
         s = ", ";
