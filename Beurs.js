@@ -7,7 +7,7 @@ var specials = [];
 function initializePeople(){
     people = [];
     var arr = DB_getPersoonIds();
-    for(i = 0; i < arr.length; i++){
+    for(var i = 0; i < arr.length; i++){
         var someone = DB_getPersonById(i);
         var person = new Person(i);
         person.name = someone[0];
@@ -16,8 +16,8 @@ function initializePeople(){
 }  
 
 function initializeTasks(){
-    for(i = 0; i < 6; i++){
-        taak = task.load(i);
+    for(var i = 0; i < 6; i++){
+        var taak = task.load(i);
         tasks.push(taak);
     }
     

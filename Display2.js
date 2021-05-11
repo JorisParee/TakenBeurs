@@ -27,7 +27,7 @@ function createRadioButton(naam, id, name){ //Zou chill zijn als we iets kunne v
 
 function createGraph(id, points, labels){
     var ctx = document.getElementById(id).getContext('2d');
-var chart = new Chart(ctx, {
+    var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
 
