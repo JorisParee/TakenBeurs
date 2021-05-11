@@ -2,19 +2,21 @@
 
 include("sql_connect.php");
 
-$id = $_POST['id'];
-$id = $conn->real_escape_string($id);
+$user_id = $_POST['user_id'];
+$user_id = $conn->real_escape_string($id);
 
-$query = "SELECT `id`, `name`, `description` FROM `task` WHERE `id` = '".$id."' ;";
+$query = "SELECT `id` FROM `completed` WHERE `user_id` = '" . $user_id . "';" ;
 
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     // output data of each row, should only be one row.
 
-    $row = $result->fetch_assoc();
+    $return = [];
+    while ($row = $result->fetch_assoc()){
 
-    $return -> $row;
+        array_push($return, $row);
+    }
 
     $json = json_encode($return);
 
@@ -23,7 +25,6 @@ if ($result->num_rows > 0) {
 } else {
     echo "Error: 0 results";
 }
-
 
 include("sql_close.php");
 

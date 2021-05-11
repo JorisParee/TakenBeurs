@@ -5,7 +5,7 @@ include("sql_connect.php");
 $id = $_POST['id'];
 $id = $conn->real_escape_string($id);
 
-$query = "SELECT `id`, `name`, `description` FROM `task` WHERE `id` = '".$id."' ;";
+$query = "SELECT `id`, `task_id`, `amount`, `date` FROM `price` WHERE `id` = '".$id."' ;";
 
 $result = $conn->query($query);
 
@@ -17,7 +17,6 @@ if ($result->num_rows > 0) {
     $return -> $row;
 
     $json = json_encode($return);
-
     echo $json;
 
 } else {

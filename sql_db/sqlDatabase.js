@@ -46,7 +46,7 @@ function DB_addPrijs(taak_id, prijs, datum) {
     data.append("prijs", prijs);
     data.append("datum", datum);
 
-    fetch("/sql_addPrice.php", {
+    fetch("sql_db/sql_addPrice.php", {
         method: 'post',
         body: data
     })
@@ -74,7 +74,7 @@ function DB_addGedaan(persoon_id, prijs_id) {
     data.append("persoon_id", persoon_id);
     data.append("prijs_id", prijs_id);
 
-    fetch("/sql_addCompleted.php", {
+    fetch("sql_db/sql_addCompleted.php", {
         method: 'post',
         body: data
     })
@@ -161,7 +161,7 @@ function DB_getPrijsById(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
-    fetch("/sql_addUser.php", {
+    fetch("sql_db/sql_getPriceById.php", {
         method: 'post',
         body: data
     })
@@ -189,7 +189,7 @@ function DB_getGedaanById(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
-    fetch("/sql_addUser.php", {
+    fetch("sql_db/sql_getCompletedById.php", {
         method: 'post',
         body: data
     })
@@ -217,7 +217,7 @@ function DB_getPersonById(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
-    fetch("/sql_addUser.php", {
+    fetch("sql_db/sql_geteUserById.php", {
         method: 'post',
         body: data
     })
@@ -242,7 +242,7 @@ function DB_getPersonById(id, callback) {
 function DB_getTaakIds() {
     var data = new URLSearchParams();
 
-    fetch("/sql_addUser.php", {
+    fetch("sql_db/sql_getTaskIds.php", {
         method: 'post',
         body: data
     })
@@ -261,11 +261,11 @@ function DB_getTaakIds() {
 /**
  * returns all id's of the existing prijszen in the database
  */
-function DB_getPrijsIdsByTaskId(id, callback) {
+function DB_getPrijsIdsByTaskId(task_id, callback) {
     var data = new URLSearchParams();
-    data.append("id", id);
+    data.append("task_id", task_id);
 
-    fetch("/sql_addUser.php", {
+    fetch("sql_db/sql_getPriceIdsByTaskId.php", {
         method: 'post',
         body: data
     })
@@ -284,11 +284,11 @@ function DB_getPrijsIdsByTaskId(id, callback) {
 /**
  * returns all id's of the existing gedaan in the database
  */
-function DB_getGedaanIdsByTaskId(id, callback) {
+function DB_getGedaanIdsByTaskId(task_id, callback) {
     var data = new URLSearchParams();
-    data.append("id", id);
+    data.append("task_id", task_id);
 
-    fetch("/sql_addUser.php", {
+    fetch("sql_db/sql_getCompletedIdsByTaskId.php", {
         method: 'post',
         body: data
     })
@@ -307,11 +307,11 @@ function DB_getGedaanIdsByTaskId(id, callback) {
 /**
  * returns all id's of the exitsting gedaans done by a specific person
  */
-function DB_getGedaanIdsByUserId(id, callback) {
+function DB_getGedaanIdsByUserId(user_id, callback) {
     var data = new URLSearchParams();
-    data.append("id", id);
+    data.append("user_id", user_id);
 
-    fetch("/sql_addUser.php", {
+    fetch("sql_db/sql_getCompletedIdsByUserId.php", {
         method: 'post',
         body: data
     })
@@ -334,7 +334,7 @@ function DB_getGedaanIdsByUserId(id, callback) {
 function DB_getPersoonIds() {
     var data = new URLSearchParams();
 
-    fetch("/sql_addUser.php", {
+    fetch("sql_db/sql_getUserIds.php", {
         method: 'post',
         body: data
     })

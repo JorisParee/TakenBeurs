@@ -5,7 +5,7 @@ include("sql_connect.php");
 $id = $_POST['id'];
 $id = $conn->real_escape_string($id);
 
-$query = "SELECT `id`, `name`, `description` FROM `task` WHERE `id` = '".$id."' ;";
+$query = "SELECT `id`, `price_id`, `user_id` FROM `completed` WHERE `id` = '".$id."' ;";
 
 $result = $conn->query($query);
 
