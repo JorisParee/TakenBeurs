@@ -239,7 +239,7 @@ function DB_getPersonById(id, callback) {
 /**
  * returns all id's of the existing taaken in the database
  */
-function DB_getTaakIds() {
+function DB_getTaakIds(callback) {
     var data = new URLSearchParams();
 
     fetch("sql_db/sql_getTaskIds.php", {
@@ -331,7 +331,7 @@ function DB_getGedaanIdsByUserId(user_id, callback) {
 /**
  * returns all id's of the existing taaken in the database
  */
-function DB_getPersoonIds() {
+function DB_getPersoonIds(callback) {
     var data = new URLSearchParams();
 
     fetch("sql_db/sql_getUserIds.php", {
