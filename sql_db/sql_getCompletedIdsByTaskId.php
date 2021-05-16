@@ -3,9 +3,9 @@
 include("sql_connect.php");
 
 $task_id = $_POST['task_id'];
-$task_id = $conn->real_escape_string($id);
+$task_id = $conn->real_escape_string($task_id);
 
-$query = "SELECT `completed.id` FROM `completed` JOIN `price` ON `price.id` = `completed.price_id` WHERE `price.task_id` = '" . $task_id . "';" ;
+$query = "SELECT `completed`.`id` AS 'id' FROM `completed` JOIN `price` ON `price`.`id` = `completed`.`price_id` WHERE `price`.`task_id` = '" . $task_id . "';" ;
 
 $result = $conn->query($query);
 
@@ -23,7 +23,9 @@ if ($result->num_rows > 0) {
     echo $json;
 
 } else {
-    echo "Error: 0 results";
+    $return = [];
+    $json = json_encode($return);
+    echo $json;
 }
 
 include("sql_close.php");

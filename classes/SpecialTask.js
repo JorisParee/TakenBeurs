@@ -1,4 +1,4 @@
-class specialTask extends task {
+class SpecialTask extends Task {
 
     /**
      * constructor of th especial task
@@ -6,14 +6,14 @@ class specialTask extends task {
      * 
      * @override
      */
-    constructor(task_id) {
-        super();
-        this.initialize(task_id);
+    constructor(task_data) {
+        super(task_data);//already loads id name and description
+        this.initialize(task_data);
     }
 
 
     /**
-     * initalizes all values from the database;
+     * initalizes left over values from the database;
      * 
      * @param {id} task_id
      * @override
@@ -21,9 +21,6 @@ class specialTask extends task {
     initialize(task_id) {
         //gets all values from te database and saves it.
         this.price = 100;
-        this.name = "specialname";
-        this.endTime = Date;
-        this.id = task_id;
     }
 
 
@@ -57,14 +54,33 @@ class specialTask extends task {
      * @override
      */
     setTaskDone() {
-        //set in database done
-        this.remove();
+        
+    }
+
+
+
+    //a static list with all the specialtasks at their indexed id.
+    static specialTasks = [];
+
+    static getSpecialTaskById(task_id) {
+        if (this.specialTasks[task_id] != undefined){
+            return this.specialTasks[task_id];
+        } else {
+            this.load(task_id);
+            return this.specialTasks[task_id];
+        }
     }
 
     /**
-     * removes this special task since it is done.
+     * 
+     * @param {int} task_id 
+     * 
+     * @Override
      */
-    remove() {
-        
+    static load(task_id) {
+        DB_getTaskById(id, function(data){
+            var newSpecial = new SpecialTask(data);
+            specialTask[task_id] = newSpecial;
+        })
     }
 }

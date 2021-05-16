@@ -13,7 +13,13 @@ $query = "INSERT INTO `completed` (`price_id`, `user_id`) VALUES ('".$prijs_id."
 $result = $conn->query($query);
 
 if ($result === TRUE) {
-    echo "Succes";
+    
+    $last_id = $conn -> insert_id;
+
+    $return -> insert_id = $last_id;
+    echo $return;
+    
+
 } else {
     echo "Error " . $conn->error ;
 }

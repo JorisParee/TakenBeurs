@@ -20,7 +20,9 @@ if ($result->num_rows > 0) {
     echo $json;
 
 } else {
-    echo "Error: 0 results";
+    $return = [];
+    $json = json_encode($return);
+    echo $json;
 }
 
 include("sql_close.php");

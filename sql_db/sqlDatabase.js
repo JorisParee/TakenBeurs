@@ -1,6 +1,6 @@
 
 //add functions
-
+var DB_testing = false;
 /**
  * voeg een taak toe aan de database
  * 
@@ -40,7 +40,7 @@ function DB_addTaak(naam, beschrijving) {
  * @param {Date} datum a date, must have year, month, day, hour, minute, second.
  * @post this instance is added to the database
  */
-function DB_addPrijs(taak_id, prijs, datum) {
+function DB_addPrijs(taak_id, prijs, datum, callback) {
     var data = new URLSearchParams();
     data.append("taak_id", taak_id);
     data.append("prijs", prijs);
@@ -51,13 +51,18 @@ function DB_addPrijs(taak_id, prijs, datum) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
-        
+        callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , taak_id: " + taak_id + " , prijs: " + " , datum: " + datum + " , callback: " + callback);
     })
     
 }
@@ -69,7 +74,7 @@ function DB_addPrijs(taak_id, prijs, datum) {
  * @param {int} prijs_id must be a valid prijsid
  * @post this instance is added to the database
  */
-function DB_addGedaan(persoon_id, prijs_id) {
+function DB_addGedaan(persoon_id, prijs_id, callback) {
     var data = new URLSearchParams();
     data.append("persoon_id", persoon_id);
     data.append("prijs_id", prijs_id);
@@ -79,13 +84,18 @@ function DB_addGedaan(persoon_id, prijs_id) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
-        
+        callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , persoon_id: " + persoon_id + " , prijs_id: " + prijs_id + " , callback: " + callback);
     })
     
 }
@@ -138,13 +148,18 @@ function DB_getTaakById(id, callback) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , id: " + id + " , callback: " + callback);
     })
     
 }
@@ -166,13 +181,18 @@ function DB_getPrijsById(id, callback) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , id: " + id +  " , callback: " + callback);
     })
     
 }
@@ -194,13 +214,18 @@ function DB_getGedaanById(id, callback) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , id: " + id + " , callback: " + callback);
     })
     
 }
@@ -217,18 +242,23 @@ function DB_getPersonById(id, callback) {
     var data = new URLSearchParams();
     data.append("id", id);
 
-    fetch("sql_db/sql_geteUserById.php", {
+    fetch("sql_db/sql_getUserById.php", {
         method: 'post',
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , id: " + id + " , callback: " + callback);
     })
 }
 
@@ -247,13 +277,18 @@ function DB_getTaakIds(callback) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , callback: " + callback);
     })
     
 }
@@ -270,13 +305,18 @@ function DB_getPrijsIdsByTaskId(task_id, callback) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , task_id: " + task_id + " , callback: " + callback);
     })
     
 }
@@ -293,13 +333,18 @@ function DB_getGedaanIdsByTaskId(task_id, callback) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , task_id: " + task_id + " , callback: " + callback);
     })
     
 }
@@ -316,13 +361,18 @@ function DB_getGedaanIdsByUserId(user_id, callback) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error:  " + error + " , user_id: " + user_id + " , callback: " + callback);
     })
 }
 
@@ -339,13 +389,18 @@ function DB_getPersoonIds(callback) {
         body: data
     })
     .then(function (response) {
+        if (DB_testing) {
+            var resp = response.text();
+            console.log(resp);
+            return JSON.parse(resp);
+        }
         return response.json();
     })
     .then(function (json) {
         callback(json);
     })
     .catch( function (error) {
-        console.log(error);
+        console.log("error: " + error + " , callback: " + callback);
     })
 }
 

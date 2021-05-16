@@ -58,12 +58,12 @@ function createGraphByTask(task){
         dates.push(dateToString(priceHistory[i][1]));
     }
 
-    createGraph("task" + String(task.id), prices, dates)
+    createGraph("task" + String(task.getId), prices, dates)
 }
 
 function createInfo(task){
     var price = task.getCurrentPrice();
-    var lastDate = task.getLastDate();
+    var lastDate = task.getLastCompletedDate();
     var p = document.createElement('p');
     p.innerText = "\u20AC"+price;
     var p2 = document.createElement('p');
@@ -147,7 +147,7 @@ function makeModalContent(modalid, task_id, description){
 
 function modalClick(taskid){
     var task = tasks[taskid];
-    var prijsid = DB_addPrijs(task.id, task.getCurrentPrice(), new Date());
+    var prijsid = DB_addPrijs(task.getId(), task.getCurrentPrice(), new Date());
     task.setTaskDone(new Date());
     var radio = document.getElementsByName('Personbut');
     var person_id = false;
@@ -158,7 +158,7 @@ function modalClick(taskid){
     });
     if(person_id != false){
     DB_addGedaan(person_id, prijsid);
-    updateTask(task, document.getElementById(task.id));
+    updateTask(task, document.getElementById(task.getId()));
     updateLeaderBoard(people);
     }
 }
@@ -166,18 +166,18 @@ function modalClick(taskid){
 function updateTask(task, row){
     row.innerHTML = "";
     var cell = row.insertCell(-1);
-    cell.appendChild(createCanvas("task" + String(task.id), "img", "aria"+String(task.name)));
+    cell.appendChild(createCanvas("task" + String(task.getId()), "img", "aria"+String(task.getName())));
     createGraphByTask(task);
     var cell2 = row.insertCell(-1);
     cell2.appendChild(createInfo(task))
     var cell3 = row.insertCell(-1);
-    var button = createButton("Doe Taak!", "Task"+ task.id+"but", {})
+    var button = createButton("Doe Taak!", "Task"+ task.getId()+"but", {})
     cell3.appendChild(button);
-    task.isTaskDisabled();
-    button.disabled = task.getDisabled();
+    task.isTaskEnabled();
+    button.disabled = !task.isTaskEnabled();
     button.onclick = function() {
-        var modal = makeModal('Task'+task.id+'modal',task.id, task.description);       
-        var span = document.getElementById('Task'+task.id+'modalspan');
+        var modal = makeModal('Task'+task.getId()+'modal',task.getId(), task.getDescription());       
+        var span = document.getElementById('Task'+task.getId()+'modalspan');
         modal.style.display = "block";
         span.onclick = function() {
             modal.remove();
@@ -191,7 +191,7 @@ function updateLeaderBoard(people){
     slider.innerHTML = '';
     var s = "";
     people.forEach(person => {
-        slider.innerHTML += s + String(person.name) + ": \u20AC" + String(person.getBalance());
+        slider.innerHTML += s + String(person.getName()) + ": \u20AC" + String(person.getBalance());
         s = ", ";
     })
 }

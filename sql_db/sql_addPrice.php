@@ -16,7 +16,12 @@ $query = "INSERT INTO `price` (`task_id`, `price`, `date`) VALUES ('".$taak_id."
 $result = $conn->query($query);
 
 if ($result === TRUE) {
-    echo "Succes";
+    //get the id of the just added price
+    $last_id = $conn->insert_id;
+
+    $return -> insert_id = $last_id;
+    echo $return;
+
 } else {
     echo "Error " . $conn->error ;
 }

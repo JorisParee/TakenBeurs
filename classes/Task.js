@@ -1,4 +1,4 @@
-class task {
+class Task{
 
     /**
      * initializes the task;
@@ -6,10 +6,10 @@ class task {
      */
     constructor(data) {
         //set the initial values of the task
-        var obj = JSON.parse(data)
+        var obj = data;
         this.id = obj.id;
         this.name = obj.name;
-        this.description = this.description;
+        this.description = obj.description;
     }
         
     /**
@@ -24,6 +24,10 @@ class task {
      */
     getName() {
         return this.name;
+    }
+
+    getDescription() {
+        return this.description;
     }
 
     /**
@@ -42,11 +46,7 @@ class task {
 
     }
 
-    static load(id){
-        DB_getTaakById(id, function(data){
-            new task(data)
-        })
-    }
+
 }
 
 

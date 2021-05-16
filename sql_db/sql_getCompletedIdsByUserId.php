@@ -3,7 +3,7 @@
 include("sql_connect.php");
 
 $user_id = $_POST['user_id'];
-$user_id = $conn->real_escape_string($id);
+$user_id = $conn->real_escape_string($user_id);
 
 $query = "SELECT `id` FROM `completed` WHERE `user_id` = '" . $user_id . "';" ;
 
@@ -23,7 +23,9 @@ if ($result->num_rows > 0) {
     echo $json;
 
 } else {
-    echo "Error: 0 results";
+    $return = [];
+    $json = json_encode($return);
+    echo $json;
 }
 
 include("sql_close.php");
