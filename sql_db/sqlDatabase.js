@@ -62,7 +62,7 @@ function DB_addPrijs(taak_id, prijs, datum, callback) {
         callback(json);
     })
     .catch( function (error) {
-        console.log("error: " + error + " , taak_id: " + taak_id + " , prijs: " + " , datum: " + datum + " , callback: " + callback);
+        console.log("error: " + error + " , taak_id: " + taak_id + " , prijs: " + prijs + " , datum: " + datum + " , callback: " + callback);
     })
     
 }

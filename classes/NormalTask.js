@@ -68,22 +68,9 @@ class NormalTask extends Task {
      * returns if tast is disabled
      */
     getDisabled() {
-        return this.disabled;
+        return this.isTaskEnabled();
     }
 
-
-
-    /**
-     * set the disabled boolean
-     * @param {boolean} disabled_bool 
-     * 
-     * @modifies the disabled property and also changes it in the database
-     */
-    setDisabled(disabled_bool) {
-        this.disabled = disabled_bool;
-        return this.disabled;
-        //update in database;
-    }
 
     /**
      * returns the current price of this procuct
@@ -93,7 +80,7 @@ class NormalTask extends Task {
      * @returns int:  the current price as a number;
      */
     getCurrentPrice() {
-        return this.getLastPrice.getAmount();
+        return this.getLastPrice().getAmount();
     }
 
     /**
@@ -102,7 +89,7 @@ class NormalTask extends Task {
      * @return the last date someone did the task
      */
     getLastCompletedDate(){
-        return this.getlastCompleted.getDate();
+        return this.getlastCompleted().getDate();
     }
 
     //still asuming it is the last in the list, change this later to actually be the last for sure
@@ -128,18 +115,17 @@ class NormalTask extends Task {
 
 
     /**
-     * updates the price with given values;
-     * @param {int} price_int 
-     * @param {date} date_value 
+     * creates a new price instance for this task 
      */
     SetNewPrice() {
         var newPrice = Koers_newPriceForTask(this);
-        var currentdate = Date;
+        var currentdate = new Date();
+        var thisclass = this;
         DB_addPrijs(this.id, newPrice, currentdate, function(data){
             var price_id = data.insert_id;
             DB_getPrijsById(price_id, function(data2) {
                 var addedPrice = new Price(data2);
-                this.priceHistory.push(addedPrice);
+                thisclass.addPriceToHistory(addedPrice);
             })
         })
     }
@@ -150,10 +136,11 @@ class NormalTask extends Task {
      * sets the taks to done, also updates the database
      * @param {person} user 
      */
-    setTaskDone(user) {
+    SetTaskDone(user) {
         //add done task to database and update here
         var newPrice = Koers_newPriceForTaskDone(this);
-        var currentdate = Date;
+        var currentdate = new Date();
+        var thisclass = this;
         DB_addPrijs(this.id, newPrice, currentdate, function(data) {
             var price_id = data.insert_id;
             DB_addGedaan(user.getId(), data, function(data2){
@@ -161,11 +148,11 @@ class NormalTask extends Task {
                 //adding the price and gedaan to this class.
                 DB_getPrijsById(price_id, function(data3){
                     var addedPrice = new Price(data3);
-                    this.priceHistory.push(addedPrice);
+                    thisclass.addPriceToHistory(addedPrice)
                 })
                 DB_getGedaanById(gedaan_id, function(data4) {
                     var addedGedaan = new Completed(data4);
-                    this.completedHistory.push(addedGedaan);
+                    thisclass.addCompletedToHistory(addedGedaan);
                     //add the completed to the user
                     user.addCompleted(addedGedaan);//this should be done differenly to not be dependend
                 })
