@@ -20,15 +20,16 @@ class Person{
 
     loadCompletedHistory(completedIds) {
         this.completedHistory = [];
+        var thisclass = this;
         completedIds.forEach(row => {
             DB_getGedaanById(row.id, function(data) {
                 let newCompleted = new Completed(data);
-                this.completedHistory.push(newCompleted);
+                thisclass.addCompletedToHistory(newCompleted);
             })
         });
     }
 
-    addCompleted(Completed) {
+    addCompletedToHistory(Completed) {
         this.completedHistory.push(Completed);
     }
 
@@ -52,10 +53,11 @@ class Person{
      * TODO change this to having a default gedaan list and calculating it from that
      */
     getBalance(){
-        this.balance = 0;
+        var balance = 0;
         this.completedHistory.forEach(completed => {
             this.balance += completed.getPrice().getAmount();
         });
+        return balance;
     }
 
 }

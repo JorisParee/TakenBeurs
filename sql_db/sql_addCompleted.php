@@ -16,7 +16,9 @@ if ($result === TRUE) {
     
     $last_id = $conn -> insert_id;
 
-    $json = json_encode($last_id);
+    $return = new stdClass();
+    $return -> insert_id = $last_id;
+    $json = json_encode($return);
     echo $json;
     
 

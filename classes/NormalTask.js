@@ -49,7 +49,7 @@ class NormalTask extends Task {
         var thisclass = this;
         CompletedIds.forEach(row => {
             DB_getGedaanById(row.id, function(data){
-                let newCompleted = new Price(data);
+                let newCompleted = new Completed(data);
                 thisclass.addCompletedToHistory(newCompleted)
             });
         });
@@ -117,7 +117,7 @@ class NormalTask extends Task {
     /**
      * creates a new price instance for this task 
      */
-    SetNewPrice() {
+    setNewPrice() {
         var newPrice = Koers_newPriceForTask(this);
         var currentdate = new Date();
         var thisclass = this;
@@ -136,14 +136,14 @@ class NormalTask extends Task {
      * sets the taks to done, also updates the database
      * @param {person} user 
      */
-    SetTaskDone(user) {
+    setTaskDone(user) {
         //add done task to database and update here
         var newPrice = Koers_newPriceForTaskDone(this);
         var currentdate = new Date();
         var thisclass = this;
         DB_addPrijs(this.id, newPrice, currentdate, function(data) {
             var price_id = data.insert_id;
-            DB_addGedaan(user.getId(), data, function(data2){
+            DB_addGedaan(user.getId(), price_id, function(data2){
                 var gedaan_id = data2.insert_id;
                 //adding the price and gedaan to this class.
                 DB_getPrijsById(price_id, function(data3){
@@ -154,7 +154,7 @@ class NormalTask extends Task {
                     var addedGedaan = new Completed(data4);
                     thisclass.addCompletedToHistory(addedGedaan);
                     //add the completed to the user
-                    user.addCompleted(addedGedaan);//this should be done differenly to not be dependend
+                    user.addCompletedToHistory(addedGedaan);//this should be done differenly to not be dependend
                 })
             })
         })
