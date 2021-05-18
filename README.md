@@ -6,3 +6,4 @@ TODO
     - this in case task not yet done, or even when no price attached
 - nothing gets shown
 - dates (in the database) is not working corret
+- error that we want to load site before it initialized. check how to do that best

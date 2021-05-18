@@ -63,7 +63,7 @@ function displaySlideTasks(tasks){
     marquee.innerHTML = '';
     let s = "";
     tasks.forEach(task => {
-        marquee.innerHTML += s + String(task.name) + ": \u20AC" + String(task.getCurrentPrice());
+        marquee.innerHTML += s + String(task.getName()) + ": \u20AC" + String(task.getCurrentPrice());
         s = ", ";
     })
 }
@@ -83,7 +83,7 @@ function displaySlidePeople(people){
     marquee.innerHTML = '';
     let s = "";
     people.forEach(person => {
-        marquee.innerHTML += s + String(person.name) + ": \u20AC" + String(person.getBalance());
+        marquee.innerHTML += s + String(person.getName()) + ": \u20AC" + String(person.getBalance());
         s = ", ";
     })
 }

@@ -29,8 +29,9 @@ function initializeTasks(){
 initializeTasks();
 initializePeople();
 
+makeSite(tasks, people)
 
-makeBasicWebsite(tasks, people);
+//makeBasicWebsite(tasks, people);
 
 
 
