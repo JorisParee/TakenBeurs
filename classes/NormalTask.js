@@ -7,9 +7,11 @@ class NormalTask extends Task {
      * 
      * @override
      */
-    constructor(task_data) {
+    constructor(task_data, callback) {
         super(task_data);//initializes id, name and description
-        this.initialize(task_data);
+        this.initializeHistory(task_data, function() {
+            callback()
+        });
     }
 
     /**
@@ -20,39 +22,54 @@ class NormalTask extends Task {
      * 
      * @override
      */
-    initialize(task_data) {
+    initializeHistory(task_data, callback) {
         //acces data from the database
 
         var thisclass = this;
-        DB_getPrijsIdsByTaskId(this.id, function(data){
-            thisclass.loadPriceHistory(data);
+        this.loadPriceHistory(function(){
+            //this is after the pricehistory is loaded, and now start loading completedhistory
+            thisclass.loadCompletedHistory(function(){
+                //now all is loaded
+                callback();
+            })
         })
-        DB_getGedaanIdsByTaskId(this.id, function(data){
-            thisclass.loadCompletedHistory(data);
-        })
+
+
     }
 
 
-    loadPriceHistory(PriceIds) {
+    loadPriceHistory(callback) {
         this.priceHistory = [];
         var thisclass = this;
-        PriceIds.forEach(row => {
-            DB_getPrijsById(row.id, function(data){
-                let newPrice = new Price(data);
-                thisclass.addPriceToHistory(newPrice);
+        DB_getPrijsIdsByTaskId(this.id, function(data) {  
+            data.forEach(row => {
+                DB_getPrijsById(row.id, function(data2){
+                    let newPrice = new Price(data2);
+                    thisclass.addPriceToHistory(newPrice);
+                    if (thisclass.priceHistory.length == data.length) {
+                        callback();
+                    }
+                });
             });
         });
     }
 
-    loadCompletedHistory(CompletedIds) {
+    loadCompletedHistory(callback) {
         this.completedHistory = [];
         var thisclass = this;
-        CompletedIds.forEach(row => {
-            DB_getGedaanById(row.id, function(data){
-                let newCompleted = new Completed(data);
-                thisclass.addCompletedToHistory(newCompleted)
+        DB_getGedaanIdsByTaskId(this.id, function(data){ 
+            data.forEach(row => {
+                DB_getGedaanById(row.id, function(data2){ 
+                    new Completed(data2, function(newCompleted){//this gives error but is not since we use its calback creation
+                        thisclass.addCompletedToHistory(newCompleted)
+                        if (thisclass.completedHistory.length == data.length) {
+                            callback()
+                        }
+                    });
+                    
+                });
             });
-        });
+        })
     }
 
     addPriceToHistory(newPrice) {
@@ -89,7 +106,7 @@ class NormalTask extends Task {
      * @return the last date someone did the task
      */
     getLastCompletedDate(){
-        return this.getlastCompleted().getDate();
+        return this.getLastCompleted().getDate();
     }
 
     //still asuming it is the last in the list, change this later to actually be the last for sure
@@ -97,7 +114,7 @@ class NormalTask extends Task {
         return this.priceHistory[this.priceHistory.length -1];
     }
 
-    getlastCompleted() {
+    getLastCompleted() {
         return this.completedHistory[this.completedHistory.length - 1];
     }
 
@@ -165,5 +182,53 @@ class NormalTask extends Task {
         var today = new Date();
         return (today - lastDate >= new Date(604800))
     }
+
+
+
+
+    //try some shit with static functions for creating these tasks with callbacks becouse stupid stuff
+
+
+    static tasks_list = []
+
+    static clearTaskList() {
+        this.tasks_list = [];
+    }
+
+    static getAllTasks() {
+        return this.tasks_list;
+    }
+
+    static getTaskById(task_id) {
+        this.tasks_list.forEach(task => {
+            if (task.getId() == task_id) {
+                return task;
+            }
+        });
+        return null;
+    }
+
+    static createTask(task_data, callback) {
+        var newTask = new NormalTask(task_data, function(){
+            tasks_list.push(newTask)
+            callback(newTask);
+        });
+    }
+
+    static setTasksAsInDatabase(callback) {
+        this.clearTaskList();
+        DB_getTaakIds( function(data) {
+            data.forEach(row => {
+                DB_getTaakById(row.id, function(data2){
+                    NormalTask.createTask(data2, function(){
+                        if(NormalTask.getAllTasks().length == data.length){
+                            callback();
+                        }
+                    })
+                })
+            })
+        })
+    }
+
 
 }

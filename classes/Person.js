@@ -60,4 +60,50 @@ class Person{
         return balance;
     }
 
+
+
+
+    //here the static function stuff
+
+    static person_list = []
+
+    static clearPersonList() {
+        this.person_list = [];
+    }
+
+    static getAllPeople() {
+        return this.person_list;
+    }
+
+    static getPersonById(person_id) {
+        this.person_list.forEach(person => {
+            if (person.getId() == person_id) {
+                return person;
+            }
+        });
+        return null;
+    }
+
+    static createPerson(person_data, callback) {
+        var newPerson = new Person(person_data, function(){
+            person_list.push(newPerson)
+            callback(newPerson);
+        });
+    }
+
+    static setPeopleAsInDatabase(callback) {
+        this.clearPersonList();
+        DB_getPersoonIds( function(data){
+            data.forEach(row => {
+                DB_getPersonById(row.id, function(data2){
+                    Person.createPerson(data2, function(){
+                        if(Person.getAllPeople.length == data.length) {
+                            callback();
+                        }
+                    })
+                });
+            });
+        });
+    }
+
 }
