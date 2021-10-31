@@ -5,7 +5,7 @@ class Person{
      * initializes this person
      * @param {json} data 
      */
-    constructor(data) {//will be data later on
+    constructor(data, callback) {//will be data later on
         
         var obj = data
         this.id = obj.id
@@ -13,22 +13,33 @@ class Person{
         
         var thisclass = this;
         DB_getGedaanIdsByUserId(this.id, function(gedaanIds){
-            thisclass.loadCompletedHistory(gedaanIds);
+            thisclass.loadCompletedHistory(gedaanIds, function(){
+                callback(thisclass)
+            });
+
         });
         
     }
 
-    loadCompletedHistory(completedIds) {
+    loadCompletedHistory(completedIds, callback) {
         this.completedHistory = [];
         var thisclass = this;
         completedIds.forEach(row => {
             DB_getGedaanById(row.id, function(data) {
-                let newCompleted = new Completed(data);
-                thisclass.addCompletedToHistory(newCompleted);
+                new Completed(data, function(newCompleted){
+                    thisclass.addCompletedToHistory(newCompleted)
+                    if (thisclass.completedHistory.length == completedIds.length) {
+                        callback()
+                    }
+                });
             })
         });
     }
 
+    /**
+     * 
+     * @param {completedObject} Completed 
+     */
     addCompletedToHistory(Completed) {
         this.completedHistory.push(Completed);
     }

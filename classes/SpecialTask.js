@@ -3,12 +3,13 @@ class SpecialTask extends Task {
     /**
      * constructor of th especial task
      * initializes the task
-     * 
-     * @override
+     * @param {datobj} task_data
+     * @param {function} callback
      */
-    constructor(task_data) {
+    constructor(task_data, callback) {
         super(task_data);//already loads id name and description
         this.initialize(task_data);
+        callback(this);
     }
 
 

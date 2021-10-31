@@ -4,13 +4,13 @@ class NormalTask extends Task {
      * initialies the task with its values
      * 
      * @param {id} task_data needs to refer to normal task in database;
-     * 
-     * @override
+     * @param {function(TaskObject)} callback a callback that returns the created taskObject
      */
     constructor(task_data, callback) {
         super(task_data);//initializes id, name and description
+        var thisclass = this
         this.initializeHistory(task_data, function() {
-            callback()
+            callback(thisclass)
         });
     }
 
@@ -18,15 +18,15 @@ class NormalTask extends Task {
      * initialize the task with all values from the database
      * pricehistory and donehistory may not be empty;
      * 
-     * @param task needs to refer to task in database;
+     * @param task_data needs to refer to task in database;
+     * @param {fucntion} callback a function to return when it is done
      * 
-     * @override
      */
     initializeHistory(task_data, callback) {
         //acces data from the database
 
         var thisclass = this;
-        this.loadPriceHistory(function(){
+        thisclass.loadPriceHistory(function(){
             //this is after the pricehistory is loaded, and now start loading completedhistory
             thisclass.loadCompletedHistory(function(){
                 //now all is loaded
@@ -72,10 +72,17 @@ class NormalTask extends Task {
         })
     }
 
+    /**
+     * takes a priceObject and adds it to its history
+     * @param {priceOBject} newPrice 
+     */
     addPriceToHistory(newPrice) {
         this.priceHistory.push(newPrice)
     }
-
+    /**
+     * takes a completedObject adn adds it to its history
+     * @param {CompletedObject} newCompleted 
+     */
     addCompletedToHistory(newCompleted) {
         this.completedHistory.push(newCompleted);
     }
@@ -109,11 +116,11 @@ class NormalTask extends Task {
         return this.getLastCompleted().getDate();
     }
 
-    //still asuming it is the last in the list, change this later to actually be the last for sure
+    //TODO still asuming it is the last in the list, change this later to actually be the last for sure
     getLastPrice() {
         return this.priceHistory[this.priceHistory.length -1];
     }
-
+    //TODO assuming currently it is last in list which is not true
     getLastCompleted() {
         return this.completedHistory[this.completedHistory.length - 1];
     }
@@ -124,6 +131,7 @@ class NormalTask extends Task {
      * @return list being the price history, the first value is first price and last value is last known price;
      * being as a list with values in it: [prijs, datum]
      */
+    //TODO order is not actually the order yet
     getPriceHistory() {
         return this.priceHistory;
     }
@@ -133,8 +141,9 @@ class NormalTask extends Task {
 
     /**
      * creates a new price instance for this task 
+     * @param {function(priceObject)} callback a callback that gives with the new price object
      */
-    setNewPrice() {
+    setNewPrice(callback) {
         var newPrice = Koers_newPriceForTask(this);
         var currentdate = new Date();
         var thisclass = this;
@@ -143,6 +152,7 @@ class NormalTask extends Task {
             DB_getPrijsById(price_id, function(data2) {
                 var addedPrice = new Price(data2);
                 thisclass.addPriceToHistory(addedPrice);
+                callback(addedPrice)
             })
         })
     }
@@ -152,8 +162,9 @@ class NormalTask extends Task {
     /**
      * sets the taks to done, also updates the database
      * @param {person} user 
+     * @param {function(CompletedObject)} callback a callback that gives back the completed object
      */
-    setTaskDone(user) {
+    setTaskDone(user, callback) {
         //add done task to database and update here
         var newPrice = Koers_newPriceForTaskDone(this);
         var currentdate = new Date();
@@ -172,15 +183,41 @@ class NormalTask extends Task {
                     thisclass.addCompletedToHistory(addedGedaan);
                     //add the completed to the user
                     user.addCompletedToHistory(addedGedaan);//this should be done differenly to not be dependend
+                    callback(addedGedaan)
                 })
             })
         })
     }
 
+    /**
+     * 
+     * @returns if the task is enabled, so if it is done more than one week ago.
+     */
     isTaskEnabled(){
         var lastDate = this.getLastCompletedDate();
         var today = new Date();
         return (today - lastDate >= new Date(604800))
+    }
+
+    /**
+     * 
+     * @param {PersonObject} user 
+     * @returns if this user is allowed to do it currently.
+     */
+    isTaskEnabledByUser(user){
+        var today = new Date();
+        var lastDate = this.getLastCompletedDate();
+        if (today - lastDate < new Date(604800)){//done withing last week
+            return false;//TODO couple this and enabled times
+        }
+        if (today - lastDate < new Date(604800*2)){
+            //within two weeks of last time
+            var lastUser = this.getLastCompleted().getUser();
+            if (user.getId = lastUser.getId){//this is the user that last did it
+                return false
+            }
+        }
+        return true
     }
 
 
