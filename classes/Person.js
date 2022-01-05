@@ -24,16 +24,20 @@ class Person{
     loadCompletedHistory(completedIds, callback) {
         this.completedHistory = [];
         var thisclass = this;
-        completedIds.forEach(row => {
-            DB_getGedaanById(row.id, function(data) {
-                new Completed(data, function(newCompleted){
-                    thisclass.addCompletedToHistory(newCompleted)
-                    if (thisclass.completedHistory.length == completedIds.length) {
-                        callback()
-                    }
-                });
-            })
-        });
+        if (completedIds.length > 0) {
+            completedIds.forEach(row => {
+                DB_getGedaanById(row.id, function(data) {
+                    new Completed(data, function(newCompleted){
+                        thisclass.addCompletedToHistory(newCompleted)
+                        if (thisclass.completedHistory.length == completedIds.length) {
+                            callback()
+                        }
+                    });
+                })
+            });
+        } else {
+            callback();
+        }
     }
 
     /**
@@ -96,24 +100,30 @@ class Person{
     }
 
     static createPerson(person_data, callback) {
+        var thisclass = this;
         var newPerson = new Person(person_data, function(){
-            person_list.push(newPerson)
+            thisclass.person_list.push(newPerson)
             callback(newPerson);
         });
     }
 
     static setPeopleAsInDatabase(callback) {
         this.clearPersonList();
+        var thisclass = this;
         DB_getPersoonIds( function(data){
-            data.forEach(row => {
-                DB_getPersonById(row.id, function(data2){
-                    Person.createPerson(data2, function(){
-                        if(Person.getAllPeople.length == data.length) {
-                            callback();
-                        }
-                    })
+            if (data.length > 0) {
+                data.forEach(row => {   
+                    DB_getPersonById(row.id, function(data2){
+                        Person.createPerson(data2, function(){  
+                            if(Person.getAllPeople().length == data.length) {
+                                callback();
+                            }
+                        })
+                    });
                 });
-            });
+            } else {
+                callback();
+            }
         });
     }
 

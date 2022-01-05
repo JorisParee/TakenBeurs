@@ -1,0 +1,53 @@
+<HTML>
+
+    <script src = "sql_db/sqlDatabase.js"></script>
+    <script src = "classes/Person.js"></script>
+    <script src = "classes/Koers.js"></script>
+    <script src = "classes/Price.js"></script>
+    <script src = "classes/Completed.js"></script>
+    <script src = "classes/Task.js"></script>
+    <script src = "classes/NormalTask.js"></script>
+    <!--<script src = "classes/SpecialTask.js"></script> for later use -->
+    <script src = "Beurs.js"></script>
+
+        
+    <div id="total">
+        <div id="overview"></div> 
+    </div>
+
+</HTML>
+
+<script>
+    start();
+
+    function start(){
+
+        initialize(function(){
+            document.getElementById("overview").appendChild(makeOverview(NormalTask.getAllTasks()));
+        });
+
+
+    }
+
+
+    function makeOverview(tasks){
+        var total = document.createElement("div");
+        tasks.forEach(task => {
+            var taskdiv = document.createElement("div");
+            var taskname = document.createElement("h1");
+            var tasknametxt = document.createTextNode(task.getName());
+            taskname.appendChild(tasknametxt);
+            taskdiv.appendChild(taskname);
+            var taskprice = document.createElement("h1");
+            var taskpricetxt = document.createTextNode(task.getCurrentPrice());
+            taskprice.appendChild(taskpricetxt);
+            taskdiv.appendChild(taskprice);
+            var taskdate = document.createElement("h1");
+            var taskdatetxt = document.createTextNode(task.getLastCompletedDate());
+            taskdate.appendChild(taskdatetxt)
+            taskdiv.appendChild(taskdate);
+            total.appendChild(taskdiv)
+        });
+        return total;
+    }
+</script>

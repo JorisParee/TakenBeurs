@@ -42,15 +42,19 @@ class NormalTask extends Task {
         this.priceHistory = [];
         var thisclass = this;
         DB_getPrijsIdsByTaskId(this.id, function(data) {  
-            data.forEach(row => {
-                DB_getPrijsById(row.id, function(data2){
-                    let newPrice = new Price(data2);
-                    thisclass.addPriceToHistory(newPrice);
-                    if (thisclass.priceHistory.length == data.length) {
-                        callback();
-                    }
+            if (data.length > 0) {
+                data.forEach(row => {
+                    DB_getPrijsById(row.id, function(data2){
+                        let newPrice = new Price(data2);
+                        thisclass.addPriceToHistory(newPrice);
+                        if (thisclass.priceHistory.length == data.length) {
+                            callback();
+                        }
+                    });
                 });
-            });
+            } else {
+                callback()
+            }
         });
     }
 
@@ -58,17 +62,21 @@ class NormalTask extends Task {
         this.completedHistory = [];
         var thisclass = this;
         DB_getGedaanIdsByTaskId(this.id, function(data){ 
-            data.forEach(row => {
-                DB_getGedaanById(row.id, function(data2){ 
-                    new Completed(data2, function(newCompleted){//this gives error but is not since we use its calback creation
-                        thisclass.addCompletedToHistory(newCompleted)
-                        if (thisclass.completedHistory.length == data.length) {
-                            callback()
-                        }
+            if (data.length > 0) {
+                data.forEach(row => {
+                    DB_getGedaanById(row.id, function(data2){ 
+                        new Completed(data2, function(newCompleted){//this gives error but is not since we use its calback creation
+                            thisclass.addCompletedToHistory(newCompleted)
+                            if (thisclass.completedHistory.length == data.length) {
+                                callback()
+                            }
+                        });
+                        
                     });
-                    
                 });
-            });
+            } else {
+                callback();
+            }
         })
     }
 
@@ -246,8 +254,9 @@ class NormalTask extends Task {
     }
 
     static createTask(task_data, callback) {
+        var thisclass = this;
         var newTask = new NormalTask(task_data, function(){
-            tasks_list.push(newTask)
+            thisclass.tasks_list.push(newTask)
             callback(newTask);
         });
     }
@@ -255,15 +264,19 @@ class NormalTask extends Task {
     static setTasksAsInDatabase(callback) {
         this.clearTaskList();
         DB_getTaakIds( function(data) {
-            data.forEach(row => {
-                DB_getTaakById(row.id, function(data2){
-                    NormalTask.createTask(data2, function(){
-                        if(NormalTask.getAllTasks().length == data.length){
-                            callback();
-                        }
+            if (data.length > 0) {
+                data.forEach(row => {
+                    DB_getTaakById(row.id, function(data2){
+                        NormalTask.createTask(data2, function(){
+                            if(NormalTask.getAllTasks().length == data.length){
+                                callback();
+                            }
+                        })
                     })
                 })
-            })
+            } else {
+                callback();
+            }
         })
     }
 

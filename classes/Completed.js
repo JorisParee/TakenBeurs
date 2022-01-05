@@ -12,9 +12,9 @@ class Completed{
         var thisclass = this;
         DB_getPrijsById(this.price_id, function(data2){
             var priceObject = new Price(data2);
-            thisclass.price = priceObject
+            thisclass.price = priceObject;
             callback(thisclass);
-        })
+        });
     }
 
     getDate(){

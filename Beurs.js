@@ -2,16 +2,14 @@
 // this will increase and decrease as if it were a stock for each task
 
 
-function initialize(){
+function initialize(callback){
     Person.setPeopleAsInDatabase(function(){
         NormalTask.setTasksAsInDatabase( function() {
-            makeSite(Person.getAllPeople(), NormalTask.getAllTasks());
+            callback();//setup has finished
         })
     })
 } 
 
-
-initialize();
 
 
 

@@ -34,13 +34,17 @@ class Task{
      * when the task is done call this
      * will update the task state also in database.
      */
-    setTaskDone()
+    setTaskDone(){
+        // becouse parent
+    }
 
     /**
      * return the current price of this task
      * @return number being the last price;
      */
-    getCurrentPrice()
+    getCurrentPrice(){
+        //because parrent
+    }
 
 
 }
