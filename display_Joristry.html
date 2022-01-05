@@ -23,14 +23,18 @@
     function start(){
 
         initialize(function(){
-            document.getElementById("overview").appendChild(makeOverview(NormalTask.getAllTasks()));
+            StartSite();
         });
 
 
     }
 
+    function StartSite() {
+        document.getElementById("overview").appendChild(makeTaskOverview(NormalTask.getAllTasks()));
+        document.getElementById("overview").appendChild(makePersonList(Person.getAllPeople()));
+    }
 
-    function makeOverview(tasks){
+    function makeTaskOverview(tasks){
         var total = document.createElement("div");
         tasks.forEach(task => {
             var taskdiv = document.createElement("div");
@@ -49,5 +53,22 @@
             total.appendChild(taskdiv)
         });
         return total;
+    }
+
+    function makePersonList(persons) {
+        var total = document.createElement("div");
+        persons.forEach(person => {
+            var persondiv = document.createElement("div");
+            var personname = document.createElement("h1");
+            var personnametxt = document.createTextNode(person.getName());
+            personname.appendChild(personnametxt);
+            persondiv.appendChild(personname);
+            total.appendChild(persondiv)
+        });
+        return total;
+    }
+
+    function popupTask(task) {
+
     }
 </script>
