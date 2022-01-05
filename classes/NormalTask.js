@@ -137,14 +137,23 @@ class NormalTask extends Task {
      * gets the history of the prices
      * 
      * @return list being the price history, the first value is first price and last value is last known price;
-     * being as a list with values in it: [prijs, datum]
+     * being as a list with Price objects in it
      */
     //TODO order is not actually the order yet
     getPriceHistory() {
         return this.priceHistory;
     }
     
-
+    /**
+     * gets the completed of the prices
+     * 
+     * @return list being the completed history, the first value is first compl and last value is last known compl;
+     * being as a list with completed objects in it
+     */
+    //TODO order is not actually the order yet
+    getCompletedHistory() {
+        return this.completedHistory;
+    }
 
 
     /**
@@ -185,13 +194,14 @@ class NormalTask extends Task {
                 DB_getPrijsById(price_id, function(data3){
                     var addedPrice = new Price(data3);
                     thisclass.addPriceToHistory(addedPrice)
-                })
-                DB_getGedaanById(gedaan_id, function(data4) {
-                    var addedGedaan = new Completed(data4);
-                    thisclass.addCompletedToHistory(addedGedaan);
-                    //add the completed to the user
-                    user.addCompletedToHistory(addedGedaan);//this should be done differenly to not be dependend
-                    callback(addedGedaan)
+                    DB_getGedaanById(gedaan_id, function(data4) {
+                        new Completed(data4, function(addedGedaan){
+                            thisclass.addCompletedToHistory(addedGedaan);
+                            //add the completed to the user
+                            user.addCompletedToHistory(addedGedaan);//this should be done differenly to not be dependend
+                            callback(addedGedaan)
+                        });
+                    })
                 })
             })
         })
