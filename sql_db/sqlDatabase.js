@@ -40,11 +40,10 @@ function DB_addTaak(naam, beschrijving) {
  * @param {Date} datum a date, must have year, month, day, hour, minute, second.
  * @post this instance is added to the database
  */
-function DB_addPrijs(taak_id, prijs, datum, callback) {
+function DB_addPrijs(taak_id, prijs, callback) {
     var data = new URLSearchParams();
     data.append("taak_id", taak_id);
     data.append("prijs", prijs);
-    data.append("datum", datum);
 
     fetch("sql_db/sql_addPrice.php", {
         method: 'post',
@@ -62,7 +61,7 @@ function DB_addPrijs(taak_id, prijs, datum, callback) {
         callback(json);
     })
     .catch( function (error) {
-        console.log("error: " + error + " , taak_id: " + taak_id + " , prijs: " + prijs + " , datum: " + datum + " , callback: " + callback);
+        console.log("error: " + error + " , taak_id: " + taak_id + " , prijs: " + prijs + " , callback: " + callback);
     })
     
 }

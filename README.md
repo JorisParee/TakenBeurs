@@ -9,3 +9,4 @@ TODO
 - error that we want to load site before it initialized. check how to do that best
 - make some kind of updatelistener that updates the site view when new prices or completeds are made. 
 - errors in initialie when use foreach loop it will not create if no children, so use a if length >0 check
+- make completeds have the already existing price element as price instead of new one. maybe, look at it

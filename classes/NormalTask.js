@@ -184,9 +184,9 @@ class NormalTask extends Task {
     setTaskDone(user, callback) {
         //add done task to database and update here
         var newPrice = Koers_newPriceForTaskDone(this);
-        var currentdate = new Date();
+        //var currentdate = new Date();
         var thisclass = this;
-        DB_addPrijs(this.id, newPrice, currentdate, function(data) {
+        DB_addPrijs(this.id, newPrice, function(data) {
             var price_id = data.insert_id;
             DB_addGedaan(user.getId(), price_id, function(data2){
                 var gedaan_id = data2.insert_id;
