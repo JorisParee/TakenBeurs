@@ -162,9 +162,9 @@ class NormalTask extends Task {
      */
     setNewPrice(callback) {
         var newPrice = Koers_newPriceForTask(this);
-        var currentdate = new Date();
+        // currentdate = new Date();
         var thisclass = this;
-        DB_addPrijs(this.id, newPrice, currentdate, function(data){
+        DB_addPrijs(this.id, newPrice, function(data){
             var price_id = data.insert_id;
             DB_getPrijsById(price_id, function(data2) {
                 var addedPrice = new Price(data2);
@@ -212,7 +212,7 @@ class NormalTask extends Task {
      * @returns if the task is enabled, so if it is done more than one week ago.
      */
     isTaskEnabled(){
-        var lastDate = this.getLastCompletedDate();
+        var lastDate = this.getLastCompletedDate();//TODO prob need some parsing
         var today = new Date();
         return (today - lastDate >= new Date(604800))
     }
