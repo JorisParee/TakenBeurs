@@ -214,9 +214,9 @@ class NormalTask extends Task {
      * @returns if the task is enabled, so if it is done more than one week ago.
      */
     isTaskEnabled(){
-        var lastDate = this.getLastCompletedDate();//TODO prob need some parsing
-        var today = new Date();
-        return (today - lastDate >= new Date(604800))
+        var lastDate = new Date(this.getLastCompletedDate());//TODO prob need some parsing
+        var today = new Date();//TODO make it get date from database or smthn not dependent on local setting
+        return (today - lastDate >= new Date(604800000))
     }
 
     /**
@@ -226,14 +226,14 @@ class NormalTask extends Task {
      */
     isTaskEnabledByUser(user){
         var today = new Date();
-        var lastDate = this.getLastCompletedDate();
-        if (today - lastDate < new Date(604800)){//done withing last week
+        var lastDate = new Date(this.getLastCompletedDate());
+        if (today - lastDate < new Date(604800000)){//done withing last week
             return false;//TODO couple this and enabled times
         }
-        if (today - lastDate < new Date(604800*2)){
+        if (today - lastDate < new Date(604800000*2)){
             //within two weeks of last time
-            var lastUser = this.getLastCompleted().getUser();
-            if (user.getId = lastUser.getId){//this is the user that last did it
+            var lastUserId = this.getLastCompleted().getUserId();
+            if (user.getId() == lastUserId){//this is the user that last did it
                 return false
             }
         }
