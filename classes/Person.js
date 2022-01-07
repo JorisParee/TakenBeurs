@@ -71,7 +71,7 @@ class Person{
     getBalance(){
         var balance = 0;
         this.completedHistory.forEach(completed => {
-            this.balance += completed.getPrice().getAmount();
+            balance += Number(completed.getPrice().getAmount());
         });
         return balance;
     }
