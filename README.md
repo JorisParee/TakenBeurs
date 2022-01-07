@@ -2,11 +2,7 @@
 de takenbeurs voor in de casa om de taken te doen, maar dan op een tantoeleipe manier
 
 TODO
-- currently in person and task when object is not there it will give error, make it return null
-    - this in case task not yet done, or even when no price attached
-- nothing gets shown
-- dates (in the database) is not working corret
-- error that we want to load site before it initialized. check how to do that best
+- probalby will error when asking for prices of completes when none there, look at full use of the function and make sure it does not chrash but prints error.
 - make some kind of updatelistener that updates the site view when new prices or completeds are made. 
-- errors in initialie when use foreach loop it will not create if no children, so use a if length >0 check
 - make completeds have the already existing price element as price instead of new one. maybe, look at it
+- dates in lists are not in order, make it be.

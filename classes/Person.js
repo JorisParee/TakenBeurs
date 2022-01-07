@@ -46,6 +46,7 @@ class Person{
      */
     addCompletedToHistory(Completed) {
         this.completedHistory.push(Completed);
+        this.completedHistory.sort(function(a,b){return (new Date(a.getDate()) - new Date(b.getDate()))})
     }
 
     /**
@@ -91,12 +92,13 @@ class Person{
     }
 
     static getPersonById(person_id) {
-        this.person_list.forEach(person => {
+        var ans = null;
+        this.getAllPeople().forEach(person => {
             if (person.getId() == person_id) {
-                return person;
+                ans =  person;
             }
         });
-        return null;
+        return ans;
     }
 
     static createPerson(person_data, callback) {

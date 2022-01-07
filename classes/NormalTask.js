@@ -86,6 +86,7 @@ class NormalTask extends Task {
      */
     addPriceToHistory(newPrice) {
         this.priceHistory.push(newPrice)
+        this.priceHistory.sort(function(a,b){return (new Date(a.getDate()) - new Date(b.getDate()))});
     }
     /**
      * takes a completedObject adn adds it to its history
@@ -93,6 +94,7 @@ class NormalTask extends Task {
      */
     addCompletedToHistory(newCompleted) {
         this.completedHistory.push(newCompleted);
+        this.completedHistory.sort(function(a,b){return (new Date(a.getDate()) - new Date(b.getDate()))});
     }
 
 
@@ -255,12 +257,13 @@ class NormalTask extends Task {
     }
 
     static getTaskById(task_id) {
+        var ans = null
         this.tasks_list.forEach(task => {
             if (task.getId() == task_id) {
-                return task;
+                ans =  task;
             }
         });
-        return null;
+        return ans;
     }
 
     static createTask(task_data, callback) {
